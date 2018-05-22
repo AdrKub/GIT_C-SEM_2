@@ -1,0 +1,7 @@
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\bin\Debug\LINQ_4_1.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\bin\Debug\LINQ_4_1.exe
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\bin\Debug\LINQ_4_1.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\obj\Debug\LINQ_4_1.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\obj\Debug\LINQ_4_1.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\obj\Debug\LINQ_4_1.exe
+D:\HBU_NDS\GIT_C#1\C#_2\LINQ_4_1\LINQ_4_1\obj\Debug\LINQ_4_1.pdb

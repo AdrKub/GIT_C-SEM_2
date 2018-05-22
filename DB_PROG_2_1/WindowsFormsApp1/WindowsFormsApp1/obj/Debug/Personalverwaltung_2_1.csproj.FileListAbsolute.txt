@@ -1,0 +1,10 @@
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Personalverwaltung_2_1.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Personalverwaltung_2_1.csproj.GenerateResource.Cache
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Personalverwaltung_2_1.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\DB_PROG_2_1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Personalverwaltung.resources
