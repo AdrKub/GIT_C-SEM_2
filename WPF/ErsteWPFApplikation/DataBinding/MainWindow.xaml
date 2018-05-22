@@ -1,0 +1,29 @@
+﻿<Window x:Class="DataBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataBinding"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:Car x:Key="DataSourceCar" Brand="Mitsubishi" Model="Evolution" Color="Green" />
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource DataSourceCar}}">
+        <Label FontSize="16" Content="Brand:" HorizontalAlignment="Left" Margin="32,29,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" Content="Model:" HorizontalAlignment="Left" Margin="32,65,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" Content="Color:" HorizontalAlignment="Left" Margin="35,101,0,0" VerticalAlignment="Top"/>
+        
+        <!-- BEISPIEL 1.A/B
+        <TextBox Name="tbxBrand" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="117,31,0,0" TextWrapping="Wrap" Text="{Binding Path=Brand, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbxModel" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="117,67,0,0" TextWrapping="Wrap" Text="{Binding Path=Model, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lblColor" FontSize="16" Foreground="{Binding Path=Color, Mode=OneWay}" Content="{Binding Path=Color, Mode=OneWay}" HorizontalAlignment="Left" Margin="117,101,0,0" VerticalAlignment="Top"/>
+        -->
+
+        <TextBox Name="tbxBrand" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="117,31,0,0" TextWrapping="Wrap" Text="{Binding Path=Brand, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbxModel" FontSize="16" HorizontalAlignment="Left" Height="23" Margin="117,67,0,0" TextWrapping="Wrap" Text="{Binding Path=Model, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lblColor" FontSize="16" Foreground="{Binding Path=Color, Mode=OneWay}" Content="{Binding Path=Color, Mode=OneWay}" HorizontalAlignment="Left" Margin="117,101,0,0" VerticalAlignment="Top"/>
+        <Button Content="Modify Model" Name="btnModify" HorizontalAlignment="Left" Margin="382,218,0,0" VerticalAlignment="Top" Width="108" Click="btnModify_Click"/>
+
+    </Grid>
+</Window>

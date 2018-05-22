@@ -1,0 +1,6 @@
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\bin\Debug\20_MvvmFramework.dll
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\bin\Debug\20_MvvmFramework.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\obj\Debug\20_MvvmFramework.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\obj\Debug\20_MvvmFramework.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\obj\Debug\20_MvvmFramework.dll
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\20_MvvmFramework\obj\Debug\20_MvvmFramework.pdb

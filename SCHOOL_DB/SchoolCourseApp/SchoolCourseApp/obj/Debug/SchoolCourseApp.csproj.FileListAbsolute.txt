@@ -1,0 +1,15 @@
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.Form1.resources
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.Properties.Resources.resources
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.csproj.GenerateResource.Cache
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\SchoolCourseApp.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\SchoolCourseApp.exe
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\SchoolCourseApp.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\EntityFramework.dll
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\EntityFramework.SqlServer.dll
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\EntityFramework.xml
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\EntityFramework.SqlServer.xml
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\bin\Debug\de\EntityFramework.resources.dll
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.exe
+D:\HBU_NDS\GIT_C#1\C#_2\SCHOOL_DB\SchoolCourseApp\SchoolCourseApp\obj\Debug\SchoolCourseApp.pdb

@@ -1,0 +1,25 @@
+﻿<Window x:Class="WPFGrid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFGrid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140*"/>
+            <ColumnDefinition Width="227*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="173*"/>
+            <RowDefinition Height="98*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Button" Grid.Row="1"/>
+        <Button Content="Button" Grid.Row="2"/>
+        <Button Content="Button" Grid.Row="1" Grid.Column="2"/>
+
+    </Grid>
+</Window>

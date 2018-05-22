@@ -1,0 +1,16 @@
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\MainWindow.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\App.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\MainWindow.baml
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.csproj.GenerateResource.Cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\bin\Debug\Book_MVVM_Step_3.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\bin\Debug\Book_MVVM_Step_3.exe
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\bin\Debug\Book_MVVM_Step_3.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3_MarkupCompile.cache
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3_MarkupCompile.lref
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.g.resources
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.Properties.Resources.resources
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.exe
+D:\HBU_NDS\GIT_C#1\C#_2\MVVM\Book_MVVM_Step_1\Book_MVVM_Step_3\obj\Debug\Book_MVVM_Step_3.pdb

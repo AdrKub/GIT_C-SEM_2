@@ -1,0 +1,36 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ErsteWPFApplikation"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ErsteWPFApplikation.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="300" Background="DarkSeaGreen">
+    <Grid>
+        <TextBox x:Name="TxtBx_NumberValueA" HorizontalAlignment="Left" Height="23" Margin="91,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="Lbl_A" Content="A" HorizontalAlignment="Left" Margin="59,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.778,0.538"/>
+        <Label Content="B" HorizontalAlignment="Left" Margin="59,132,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBx_NumberValueB" HorizontalAlignment="Left" Height="23" Margin="91,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Btn_Add" Content="A+B" HorizontalAlignment="Left" Margin="102,174,0,0" VerticalAlignment="Top" Width="75" Click="Btn_Add_Click" Background="Aqua"/>
+        <TextBox x:Name="TxtBx_ResultValue" HorizontalAlignment="Left" Height="23" Margin="91,216,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Test">
+            <Button.HorizontalAlignment>
+                <HorizontalAlignment>Left</HorizontalAlignment>
+            </Button.HorizontalAlignment>
+            <Button.Margin>
+                <Thickness>102,357,0,0</Thickness>
+            </Button.Margin>
+            <Button.VerticalAlignment>
+                <VerticalAlignment>Top</VerticalAlignment>
+            </Button.VerticalAlignment>
+            <Button.Width>
+                <System:Double>75</System:Double>
+            </Button.Width>
+            <Button.Background>
+                <Brush>Red</Brush>
+            </Button.Background> Juhuuuui
+        </Button>
+
+    </Grid>
+</Window>

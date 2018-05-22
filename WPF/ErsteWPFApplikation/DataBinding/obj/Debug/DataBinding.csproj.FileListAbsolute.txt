@@ -1,0 +1,16 @@
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\bin\Debug\DataBinding.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\bin\Debug\DataBinding.exe
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\bin\Debug\DataBinding.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\MainWindow.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\App.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding_MarkupCompile.cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding_MarkupCompile.lref
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\MainWindow.baml
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.g.resources
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.Properties.Resources.resources
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.csproj.GenerateResource.Cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.exe
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\DataBinding.csprojResolveAssemblyReference.cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\DataBinding\obj\Debug\GeneratedInternalTypeHelper.g.cs

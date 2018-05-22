@@ -1,0 +1,15 @@
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\bin\Debug\WPFLayout.exe.config
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\bin\Debug\WPFLayout.exe
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\bin\Debug\WPFLayout.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\MainWindow.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\App.g.cs
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout_MarkupCompile.cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout_MarkupCompile.lref
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\MainWindow.baml
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.g.resources
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.Properties.Resources.resources
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.csproj.GenerateResource.Cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.csproj.CoreCompileInputs.cache
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.exe
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.pdb
+D:\HBU_NDS\GIT_C#1\C#_2\WPF\ErsteWPFApplikation\WPFLayout\obj\Debug\WPFLayout.csprojResolveAssemblyReference.cache

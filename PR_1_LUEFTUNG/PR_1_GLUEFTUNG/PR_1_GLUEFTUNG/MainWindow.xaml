@@ -1,0 +1,43 @@
+﻿<Window x:Class="PR_1_GLUEFTUNG.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PR_1_GLUEFTUNG"
+        xmlns:l="clr-namespace:PR_1_GLUEFTUNG.Control"
+        xmlns:h="clr-namespace:PR_1_GLUEFTUNG.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="396.192" Width="445.031">
+    <Window.Resources>
+        <local:SpecStringConverter x:Key="strconverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <h:VentViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Label Name="lbl_EngStatus" Content="Zustand Lüftung" HorizontalAlignment="Left" Margin="12,154,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label Name="lbl_EngVoltage" Content="Spannung [V]" HorizontalAlignment="Left" Margin="12,184,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label Name="lbl_EngCurrent" Content="Strom [mA]" HorizontalAlignment="Left" Margin="12,214,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label Name="lbl_EngSpeed" Content="Drehzahl [U/min]" HorizontalAlignment="Left" Margin="12,244,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label Name="lbl_EngPower" Content="Leistung [W]" HorizontalAlignment="Left" Margin="12,274,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label Name="lbl_Val_EngStatus" Content="{Binding Fan_1.Eng_IsOnOff}" HorizontalAlignment="Left" Margin="137,154,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" Background="#FFE4E4E4"/>
+        <Label Name="lbl_Val_EngVoltage" Content="{Binding Fan_1.Eng_Voltage, Converter={StaticResource strconverter}}" HorizontalAlignment="Left" Margin="137,184,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" Background="#FFE4E4E4"/>
+        <Label Name="lbl_Val_EngCurrent" Content="{Binding Fan_1.Eng_Current, Converter={StaticResource strconverter}}"  HorizontalAlignment="Left" Margin="137,214,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" Background="#FFE4E4E4"/>
+        <Label Name="lbl_Val_EngSpeed" Content="{Binding Fan_1.Eng_Speed, Converter={StaticResource strconverter}}" HorizontalAlignment="Left" Margin="137,244,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" Background="#FFE4E4E4"/>
+        <Label Name="lbl_Val_EngPower" Content="{Binding Fan_1.Eng_Power, Converter={StaticResource strconverter}}" HorizontalAlignment="Left" Margin="137,274,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" SnapsToDevicePixels="True" Background="#FFE4E4E4"/>
+        <Label Name="lbl_ActLevel" Content="Aktive Stufe" HorizontalAlignment="Left" Margin="12,305,0,0" VerticalAlignment="Top" Width="109" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lbl_Val_ActLevel" Content="{Binding Ctrl_1.ActiveLevel}" HorizontalAlignment="Left" Margin="137,305,0,0" VerticalAlignment="Top" Width="74" FontWeight="Bold" Height="26" SnapsToDevicePixels="True" Background="#FFE4E4E4"/>
+
+        <Grid Name="btn_area" HorizontalAlignment="Left" Height="128" Margin="320,26,0,0" VerticalAlignment="Top" Width="100">
+            <Border BorderBrush="Black" BorderThickness="2"/>
+            <Button Name="btn_ReqOff" Content="AUS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Command="{Binding Ctrl_1.RequestLevelOff}"/>
+            <Button Name="btn_ReqLvl_1" Content="Stufe 1" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="80" Command="{Binding Ctrl_1.RequestLevel1}"/>
+            <Button Name="btn_ReqLvl_2" Content="Stufe 2" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="80" Command="{Binding Ctrl_1.RequestLevel2}"/>
+            <Button Name="btn_ReqLvl_3" Content="Stufe 3" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="80" Command="{Binding Ctrl_1.RequestLevel3}"/>
+        </Grid>
+
+        <Image HorizontalAlignment="Left" Height="158" Margin="138,8,0,0" VerticalAlignment="Top" Width="158" Source="Properties/icon_be_und_entlueftung.png" Stretch="Fill"/>
+        <CheckBox Name="Ckbx_DataLogger" Content="Lüfterdaten Loggen EIN/AUS" HorizontalAlignment="Left" Margin="252,339,0,0" VerticalAlignment="Top" Width="178" Command="{Binding Fan_1.OnOffLog}"/>
+
+    </Grid>
+</Window>

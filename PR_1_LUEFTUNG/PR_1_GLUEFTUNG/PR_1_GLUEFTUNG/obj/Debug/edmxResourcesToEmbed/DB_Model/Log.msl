@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LogGLueftungModelStoreContainer" CdmEntityContainer="LogGLueftungEntities">
+    <EntitySetMapping Name="tblEngineLog1">
+      <EntityTypeMapping TypeName="LogGLueftungModel.tblEngineLog1">
+        <MappingFragment StoreEntitySet="tblEngineLogs">
+          <ScalarProperty Name="ActDate" ColumnName="ActDate" />
+          <ScalarProperty Name="ActVoltage" ColumnName="ActVoltage" />
+          <ScalarProperty Name="ActSpeed" ColumnName="ActSpeed" />
+          <ScalarProperty Name="ActPower" ColumnName="ActPower" />
+          <ScalarProperty Name="ActCurrent" ColumnName="ActCurrent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
