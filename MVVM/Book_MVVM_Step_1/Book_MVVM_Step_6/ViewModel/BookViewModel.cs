@@ -1,9 +1,9 @@
-﻿using Book_MVVM_Step_4.Model;
+﻿using Book_MVVM_Step_6.Model;
 using System.ComponentModel;
 using System.Windows.Input;
 using _20_MvvmFramework;
 
-namespace Book_MVVM_Step_4.ViewModel
+namespace Book_MVVM_Step_6.ViewModel
 {
     public class BookViewModel : ObservableObject
     {

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Book_MVVM_Step_6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Book_MVVM_Step_6"
+        xmlns:localviewmodel="clr-namespace:Book_MVVM_Step_6.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="491.915" Width="772.264">
+    <Window.DataContext>
+        <!--Deklarative instanzierung eines BookViewModel und DataContext setzen-->
+        <localviewmodel:BookInventoryViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Label Content="MVVM Schritt 6 - Bücherverwaltung" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="409" FontWeight="Bold"/>
+        <Label Content="Title:" HorizontalAlignment="Left" Margin="66,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="Author:" HorizontalAlignment="Left" Margin="51,108,0,0" VerticalAlignment="Top"/>
+        <Label Content="Preis:" HorizontalAlignment="Left" Margin="63,139,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding ElementName=BookInventoryListView, Path=SelectedItem.Title}" Name="LblTitel" HorizontalAlignment="Left" Margin="141,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.676,-0.119" Width="297" Height="26"/>
+        <Label Content="{Binding ElementName=BookInventoryListView, Path=SelectedItem.Author}" Name="LblAuthor" HorizontalAlignment="Left" Margin="141,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.676,-0.119" Width="297" Height="26"/>
+        <Label Content="{Binding ElementName=BookInventoryListView, Path=SelectedItem.Price}"  Name="LblPreis" HorizontalAlignment="Left" Margin="141,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.676,-0.119" Width="201" Height="26"/>
+        <Button Content="Titel setzen" Name="BtnSetTitle" HorizontalAlignment="Left" Margin="39,196,0,0" VerticalAlignment="Top" Width="98" Command="{Binding UpdateAllTitles}"/>
+        <Button Content="Author setzen" Name="BtnSetAuthor" HorizontalAlignment="Left" Margin="39,223,0,0" VerticalAlignment="Top" Width="98" Command="{Binding UpdateAllAuthors}"/>
+        <Menu HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="137">
+            <MenuItem Header="Edit">
+                <MenuItem Header="Titel setzen" Command="{Binding UpdateTitle}"/>
+            </MenuItem>
+            <MenuItem Header="Test">
+                <RadioButton/>
+            </MenuItem>
+
+
+        </Menu>
+        <ListView Name="BookInventoryListView" HorizontalAlignment="Left" Height="374" Margin="454,51,0,0" VerticalAlignment="Top" Width="285" ItemsSource="{Binding Books}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Title}" FontWeight="Bold"/>
+                        <Label Content="{Binding Author}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Name="BtnAddBook" Content="Hinzufügen" HorizontalAlignment="Left" Margin="39,288,0,0" VerticalAlignment="Top" Width="98" Command="{Binding AddBook}"/>
+        <Button Content="Preis setzen" Name="BtnSetPrice" HorizontalAlignment="Left" Margin="39,250,0,0" VerticalAlignment="Top" Width="98" Command="{Binding UpdateAllPrices}"/>
+    </Grid>
+</Window>
