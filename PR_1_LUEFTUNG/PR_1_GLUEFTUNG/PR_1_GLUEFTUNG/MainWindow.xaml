@@ -37,7 +37,7 @@
         </Grid>
 
         <Image HorizontalAlignment="Left" Height="158" Margin="138,8,0,0" VerticalAlignment="Top" Width="158" Source="Properties/icon_be_und_entlueftung.png" Stretch="Fill"/>
-        <CheckBox Name="Ckbx_DataLogger" Content="Lüfterdaten Loggen EIN/AUS" HorizontalAlignment="Left" Margin="252,339,0,0" VerticalAlignment="Top" Width="178" Command="{Binding Fan_1.OnOffLog}"/>
+        <CheckBox Name="Ckbx_DataLogger" Content="Lüfterdaten Loggen EIN/AUS" HorizontalAlignment="Left" Margin="246,329,0,0" VerticalAlignment="Top" Width="178" Command="{Binding Fan_1.OnOffLog}"/>
 
     </Grid>
 </Window>

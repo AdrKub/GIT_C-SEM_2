@@ -27,13 +27,10 @@ namespace PR_1_GLUEFTUNG
         public MainWindow()
         {
             InitializeComponent();
-            //_fan_1 = new EngControl();
-            //DataContext = _fan_1;
             
             _vent_1 = new VentViewModel();
             _vent_1.Fan_1 = new EngControl();
             _vent_1.Ctrl_1 = new LvlControl(_vent_1.Fan_1);
-            //_vent_1 = (VentViewModel) this.DataContext;
             DataContext = _vent_1;
             
         }

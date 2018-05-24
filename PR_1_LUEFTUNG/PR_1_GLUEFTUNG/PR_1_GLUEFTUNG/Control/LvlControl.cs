@@ -14,9 +14,16 @@ namespace PR_1_GLUEFTUNG.Control
     public class LvlControl : INotifyPropertyChanged
     {
         private EngControl _engineCtrl;
-        private List<Level> AvailableLvls;
+        private List<Level> _availableLvls;
         private int _actLevel;
-        private bool _loggerOnOff;
+
+        public LvlControl(EngControl engctrl)
+        {
+            _actLevel = 0;
+            _availableLvls = new List<Level>();
+            _engineCtrl = engctrl;
+            InitLvls();
+        }
 
         public int ActiveLevel
         {
@@ -25,15 +32,6 @@ namespace PR_1_GLUEFTUNG.Control
                     _actLevel = value;
                 RaisePropertyChanged("ActiveLevel");
                 }
-        }
-
-        public LvlControl(EngControl engctrl)
-        {
-            _actLevel = 0;
-            _loggerOnOff = false;
-            AvailableLvls = new List<Level>();
-            _engineCtrl = engctrl;
-            InitLvls();
         }
 
         #region GENERAL FUNCTIONS
@@ -56,7 +54,7 @@ namespace PR_1_GLUEFTUNG.Control
         {
             int _chngResult = 0;
 
-            foreach (Level lvl in AvailableLvls)
+            foreach (Level lvl in _availableLvls)
             {
                 if (lvl.LvlNumber == lvlNumber)
                 {
@@ -151,9 +149,9 @@ namespace PR_1_GLUEFTUNG.Control
             Level _lvl1 = new Level() { LvlNumber = 1, LvlShouldPower = 15.0, LvlShouldSpeed = 30.0, LvlStartUpTime = 5000.0 };
             Level _lvl2 = new Level() { LvlNumber = 2, LvlShouldPower = 45.0, LvlShouldSpeed = 60.0, LvlStartUpTime = 5000.0 };
             Level _lvl3 = new Level() { LvlNumber = 3, LvlShouldPower = 60.0, LvlShouldSpeed = 90.0, LvlStartUpTime = 5000.0 };
-            AvailableLvls.Add(_lvl1);
-            AvailableLvls.Add(_lvl2);
-            AvailableLvls.Add(_lvl3);
+            _availableLvls.Add(_lvl1);
+            _availableLvls.Add(_lvl2);
+            _availableLvls.Add(_lvl3);
         }
         #endregion
 

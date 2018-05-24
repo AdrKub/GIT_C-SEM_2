@@ -8,54 +8,19 @@ namespace PR_1_GLUEFTUNG.Model
 {
     public class Engine
     {
-        private double _actSpeed;
-        private double _actCurrent;
-        private double _actVoltage;
-        private double _actPower;
-        private string _isOn;
-
         public Engine()
         {
-            _actSpeed = 0.0;
-            _actCurrent = 0.0;
-            _actPower = 0.0;
-            _actVoltage = 0.0;
-            _isOn = "AUS";
+            Act_speed = 0.0;
+            Act_current = 0.0;
+            Act_voltage = 0.0;
+            Act_power = 0.0;
+            Eng_IsOn = "AUS";
         }
 
-        public double Act_speed
-        {
-            get { return _actSpeed; }
-
-            set { _actSpeed = value; }
-        }
-
-        public double Act_current
-        {
-            get { return _actCurrent; }
-
-            set { _actCurrent = value; }
-        }
-
-        public double Act_voltage
-        {
-            get { return _actVoltage; }
-
-            set { _actVoltage = value; }
-        }
-
-        public double Act_power
-        {
-            get { return _actPower; }
-
-            set { _actPower = value; }
-        }
-
-        public string Eng_IsOn
-        {
-            get { return _isOn; }
-
-            set { _isOn = value; }
-        }
+        public double Act_speed;
+        public double Act_current;
+        public double Act_voltage;
+        public double Act_power;
+        public string Eng_IsOn;
     }
 }
