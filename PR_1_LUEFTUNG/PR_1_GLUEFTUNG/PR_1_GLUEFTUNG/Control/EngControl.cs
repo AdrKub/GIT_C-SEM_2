@@ -23,9 +23,9 @@ namespace PR_1_GLUEFTUNG.Control
         private double _powerStepWidth;
         private double _speedStepWidth;
         private double _targetTime;
-        private CycleTimer _timerAccelerate;
+        private CycleTimer _timerAccDec;
         private CycleTimer _timerLogger;
-        private Engine _engine = new Engine();
+        private Engine _engine;
         private WriteLog _logger;
 
         public bool AccDecIsActive;
@@ -35,7 +35,8 @@ namespace PR_1_GLUEFTUNG.Control
             _accdecelerateTimeStep = 50.0;
             _loggerTimeStep = 1000.0;
             _logger = new WriteLog();
-            InitAccelerateTimer();
+            _engine = new Engine();
+            InitAccDecTimer();
             InitLoggerTimer();
         }
 
@@ -92,7 +93,7 @@ namespace PR_1_GLUEFTUNG.Control
         #endregion
 
         #region ACC/DECELERATE ENGINE
-        public int StartAccelerate(double trgSpeed, double trgPower, double trgTime)
+        public void StartAccelerate(double trgSpeed, double trgPower, double trgTime)
         {
             if (trgPower > 0 && trgSpeed > 0 && trgTime > 0)
             {
@@ -105,13 +106,10 @@ namespace PR_1_GLUEFTUNG.Control
 
                 _timerAccelerate.StartTimer(_accdecelerateTimeStep);
                 AccDecIsActive = true;
-                return 1;
             }
-            else
-                return 99;
         }
 
-        public int StartDecelerate(double trgTime)
+        public void StartDecelerate(double trgTime)
         {
             if (trgTime > 0)
             {
@@ -124,10 +122,7 @@ namespace PR_1_GLUEFTUNG.Control
 
                 _timerAccelerate.StartTimer(_accdecelerateTimeStep);
                 AccDecIsActive = true;
-                return 1;
             }
-            else
-                return 99;
         }
 
         private void Accelerate()
@@ -169,12 +164,12 @@ namespace PR_1_GLUEFTUNG.Control
 
         #region TIMER ACC/DEC
 
-        private void InitAccelerateTimer()
+        private void InitAccDecTimer()
         {
-            _timerAccelerate = new CycleTimer(AccDecStepElapsed);
+            _timerAccDec = new CycleTimer(AccDecTimerElapsed);
         }
 
-        private void AccDecStepElapsed()
+        private void AccDecTimerElapsed()
         {
             _elapsedAccDecTime = _elapsedAccDecTime + _accdecelerateTimeStep;
             if (_nextstep)
@@ -195,9 +190,9 @@ namespace PR_1_GLUEFTUNG.Control
         {
             _logger.WriteLogEntry(_engine);
         }
-        #endregion 
+        #endregion
 
-
+        #region COMMANDS
         public ICommand OnOffLog
         {
             get
@@ -224,13 +219,15 @@ namespace PR_1_GLUEFTUNG.Control
                 _timerLogger.StartTimer(_loggerTimeStep);
             }
         }
+        #endregion
 
-
+        #region CHANGE PROPERTY
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

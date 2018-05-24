@@ -10,7 +10,6 @@ namespace PR_1_GLUEFTUNG.Timer
     public class CycleTimer
     {
         private static System.Timers.Timer _timer;
-        private bool _timerElapsed = false;
         private Action _elapsed;//ACTION = Funkion ohne Rückgabewerte
 
         public CycleTimer(Action elapsed)

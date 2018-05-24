@@ -14,18 +14,6 @@ namespace PR_1_GLUEFTUNG.ViewModel
 
         public VentViewModel()
         {
-            //Fan_1 = new EngControl();
-            //Ctrl_1 = new LvlControl(Fan_1);
-        }
-
-        public double Test
-        {
-            get { return Fan_1.Eng_Current; }
-            set { TestApp(); }
-        }
-
-        void TestApp()
-        {
 
         }
     }

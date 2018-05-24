@@ -35,34 +35,29 @@ namespace PR_1_GLUEFTUNG.Control
         }
 
         #region GENERAL FUNCTIONS
-        public bool LCtrl_SwitchOff()
+        private void LCtrl_SwitchOff()
         {
             double _trgTime;
             double _lvl = Convert.ToDouble(_actLevel);
-            int _offresult = 0;
 
             if (_actLevel > 0)
             {
                 _trgTime = ((_lvl * _lvl) * 10) * 1000;
-                _offresult = _engineCtrl.StartDecelerate(_trgTime);
+                _engineCtrl.StartDecelerate(_trgTime);
                 ActiveLevel = 0;
             }
-            return true;
         }
 
-        public bool LCtrl_ChangeLevel(int lvlNumber)
+        private void LCtrl_ChangeLevel(int lvlNumber)
         {
-            int _chngResult = 0;
-
             foreach (Level lvl in _availableLvls)
             {
                 if (lvl.LvlNumber == lvlNumber)
                 {
-                    _chngResult = _engineCtrl.StartAccelerate(lvl.LvlShouldSpeed, lvl.LvlShouldPower, lvl.LvlStartUpTime);
+                    _engineCtrl.StartAccelerate(lvl.LvlShouldSpeed, lvl.LvlShouldPower, lvl.LvlStartUpTime);
                     ActiveLevel = lvlNumber;
                 }
             }
-            return true;
         }
         #endregion
 
@@ -155,11 +150,14 @@ namespace PR_1_GLUEFTUNG.Control
         }
         #endregion
 
+        #region CHANGE PROPERTY
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
