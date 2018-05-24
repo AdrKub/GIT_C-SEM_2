@@ -14,10 +14,10 @@ namespace PR_1_GLUEFTUNG.DB_Model
         {
             tblEngineLog1 _data = new tblEngineLog1()
             {
-                ActCurrent = engData.Act_current.ToString() + "[ma]",
-                ActPower = engData.Act_power.ToString() + "[W]",
-                ActSpeed = engData.Act_speed.ToString() + "[U/min]",
-                ActVoltage = engData.Act_voltage.ToString() + "[V]",
+                ActCurrent = engData.Act_current.ToString("F2") + "[ma]",
+                ActPower = engData.Act_power.ToString("F2") + "[W]",
+                ActSpeed = engData.Act_speed.ToString("F2") + "[U/min]",
+                ActVoltage = engData.Act_voltage.ToString("F2") + "[V]",
                 ActDate = DateTime.Now.ToString()
             };
 

@@ -14,10 +14,10 @@ namespace PR_1_GLUEFTUNG.Control
 {
     public class EngControl: INotifyPropertyChanged
     {
-        private double _accdecelerateTimeStep;
+        private double _accdecTimeStep;
         private double _loggerTimeStep;
         private double _elapsedAccDecTime;
-        private bool _nextstep;
+        private bool _nextStep;
         private bool _loggerOnOff;
         private double _steps;
         private double _powerStepWidth;
@@ -32,7 +32,7 @@ namespace PR_1_GLUEFTUNG.Control
 
         public EngControl()
         {
-            _accdecelerateTimeStep = 50.0;
+            _accdecTimeStep = 50.0;
             _loggerTimeStep = 1000.0;
             _logger = new WriteLog();
             _engine = new Engine();
@@ -98,13 +98,13 @@ namespace PR_1_GLUEFTUNG.Control
             if (trgPower > 0 && trgSpeed > 0 && trgTime > 0)
             {
                 _elapsedAccDecTime = 0.0;
-                _steps = trgTime / _accdecelerateTimeStep;
+                _steps = trgTime / _accdecTimeStep;
                 _powerStepWidth = (trgPower - Eng_Power) / _steps;
                 _speedStepWidth = (trgSpeed - Eng_Speed) / _steps;
                 _targetTime = trgTime;
-                _nextstep = true;
+                _nextStep = true;
 
-                _timerAccelerate.StartTimer(_accdecelerateTimeStep);
+                _timerAccDec.StartTimer(_accdecTimeStep);
                 AccDecIsActive = true;
             }
         }
@@ -114,13 +114,13 @@ namespace PR_1_GLUEFTUNG.Control
             if (trgTime > 0)
             {
                 _elapsedAccDecTime = 0.0;
-                _steps = trgTime / _accdecelerateTimeStep;
+                _steps = trgTime / _accdecTimeStep;
                 _powerStepWidth = Eng_Power / _steps;
                 _speedStepWidth = Eng_Speed / _steps;
                 _targetTime = trgTime;
-                _nextstep = false;
+                _nextStep = false;
 
-                _timerAccelerate.StartTimer(_accdecelerateTimeStep);
+                _timerAccDec.StartTimer(_accdecTimeStep);
                 AccDecIsActive = true;
             }
         }
@@ -129,7 +129,7 @@ namespace PR_1_GLUEFTUNG.Control
         {
             if(_elapsedAccDecTime > _targetTime)
             {
-                _timerAccelerate.StopTimer();
+                _timerAccDec.StopTimer();
                 AccDecIsActive = false;
             }
             else {
@@ -145,7 +145,7 @@ namespace PR_1_GLUEFTUNG.Control
         {
             if (_elapsedAccDecTime >= _targetTime)
             {
-                _timerAccelerate.StopTimer();
+                _timerAccDec.StopTimer();
                 AccDecIsActive = false;
                 Eng_IsOnOff = "AUS";
                 Eng_Voltage = 0.0;
@@ -171,8 +171,8 @@ namespace PR_1_GLUEFTUNG.Control
 
         private void AccDecTimerElapsed()
         {
-            _elapsedAccDecTime = _elapsedAccDecTime + _accdecelerateTimeStep;
-            if (_nextstep)
+            _elapsedAccDecTime = _elapsedAccDecTime + _accdecTimeStep;
+            if (_nextStep)
                 Accelerate();
             else
                 Decelerate();
