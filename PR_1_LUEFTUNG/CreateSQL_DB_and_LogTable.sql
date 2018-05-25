@@ -1,3 +1,7 @@
+CREATE DATABASE LogGLueftung
+
+USE LogGLueftung
+
 CREATE TABLE tblEngineLogs
 (
 	ID					int identity(1,1) NOT NULL,
