@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FootballMngmtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblPlayers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" Nullable="false" />
+          <Property Name="PlayerNmbr" Type="int" />
+          <Property Name="Position_ID" Type="int" Nullable="false" />
+          <Property Name="PlayedGames" Type="int" Nullable="false" />
+          <Property Name="Goals" Type="int" Nullable="false" />
+          <Property Name="PicturePath" Type="varchar(max)" />
+          <Property Name="Team_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPositions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTeams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PicturePath" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Player_Position">
+          <End Role="tblPositions" Type="Self.tblPositions" Multiplicity="1" />
+          <End Role="tblPlayers" Type="Self.tblPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPlayers">
+              <PropertyRef Name="Position_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Role="tblTeams" Type="Self.tblTeams" Multiplicity="0..1" />
+          <End Role="tblPlayers" Type="Self.tblPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPlayers">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FootballMngmtModelStoreContainer">
+          <EntitySet Name="tblPlayers" EntityType="Self.tblPlayers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPositions" EntityType="Self.tblPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTeams" EntityType="Self.tblTeams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Player_Position" Association="Self.FK_Player_Position">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblPlayers" EntitySet="tblPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
+            <End Role="tblTeams" EntitySet="tblTeams" />
+            <End Role="tblPlayers" EntitySet="tblPlayers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FootballMngmtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblPlayer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PlayerNmbr" Type="Int32" />
+          <Property Name="Position_ID" Type="Int32" Nullable="false" />
+          <Property Name="PlayedGames" Type="Int32" Nullable="false" />
+          <Property Name="Goals" Type="Int32" Nullable="false" />
+          <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Team_ID" Type="Int32" />
+          <NavigationProperty Name="tblPosition" Relationship="Self.FK_Player_Position" FromRole="tblPlayers" ToRole="tblPositions" />
+          <NavigationProperty Name="tblTeam" Relationship="Self.FK_Player_Team" FromRole="tblPlayers" ToRole="tblTeams" />
+        </EntityType>
+        <EntityType Name="tblPosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblPlayers" Relationship="Self.FK_Player_Position" FromRole="tblPositions" ToRole="tblPlayers" />
+        </EntityType>
+        <EntityType Name="tblTeam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPlayers" Relationship="Self.FK_Player_Team" FromRole="tblTeams" ToRole="tblPlayers" />
+        </EntityType>
+        <Association Name="FK_Player_Position">
+          <End Role="tblPositions" Type="Self.tblPosition" Multiplicity="1" />
+          <End Role="tblPlayers" Type="Self.tblPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPositions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPlayers">
+              <PropertyRef Name="Position_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Role="tblTeams" Type="Self.tblTeam" Multiplicity="0..1" />
+          <End Role="tblPlayers" Type="Self.tblPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTeams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPlayers">
+              <PropertyRef Name="Team_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FootballMngmtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblPlayers" EntityType="Self.tblPlayer" />
+          <EntitySet Name="tblPositions" EntityType="Self.tblPosition" />
+          <EntitySet Name="tblTeams" EntityType="Self.tblTeam" />
+          <AssociationSet Name="FK_Player_Position" Association="Self.FK_Player_Position">
+            <End Role="tblPositions" EntitySet="tblPositions" />
+            <End Role="tblPlayers" EntitySet="tblPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="Self.FK_Player_Team">
+            <End Role="tblTeams" EntitySet="tblTeams" />
+            <End Role="tblPlayers" EntitySet="tblPlayers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FootballMngmtModelStoreContainer" CdmEntityContainer="FootballMngmtEntities">
+          <EntitySetMapping Name="tblPlayers">
+            <EntityTypeMapping TypeName="FootballMngmtModel.tblPlayer">
+              <MappingFragment StoreEntitySet="tblPlayers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PlayerNmbr" ColumnName="PlayerNmbr" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+                <ScalarProperty Name="PlayedGames" ColumnName="PlayedGames" />
+                <ScalarProperty Name="Goals" ColumnName="Goals" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="Team_ID" ColumnName="Team_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPositions">
+            <EntityTypeMapping TypeName="FootballMngmtModel.tblPosition">
+              <MappingFragment StoreEntitySet="tblPositions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTeams">
+            <EntityTypeMapping TypeName="FootballMngmtModel.tblTeam">
+              <MappingFragment StoreEntitySet="tblTeams">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
