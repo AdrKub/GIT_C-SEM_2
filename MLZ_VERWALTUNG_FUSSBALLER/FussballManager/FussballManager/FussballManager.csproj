@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Position.cs" />
+    <Compile Include="Model\Team.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Page Include="MainWindow.xaml">

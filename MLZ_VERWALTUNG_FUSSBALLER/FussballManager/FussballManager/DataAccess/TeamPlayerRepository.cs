@@ -10,29 +10,38 @@ namespace FussballManager.DataAccess
 {
     public class TeamPlayerRepository
     {
+        private string DefaultPicturePath = @"Images\";
+
         //Alle vorhandenen Badges laden
-        public List<Player> TestLoadPlayers()
+        public List<Player> LoadPlayersWithTeam(int teamID)
         {
             List<tblPlayer> _players;
             List<Player> players = new List<Player>();
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {
                 // _players = context.tblPlayers.Include("tblPositions").ToList<tblPlayer>();
-                _players = (from pl in context.tblPlayers.Include("tblPosition").Include("tblTeam") select pl).ToList<tblPlayer>();
+                if(teamID == -1)
+                    _players = (from pl in context.tblPlayers.Include("tblPosition").Include("tblTeam") where pl.Team_ID == null select pl).ToList<tblPlayer>();
+                else
+                    _players = (from pl in context.tblPlayers.Include("tblPosition").Include("tblTeam") where pl.Team_ID == teamID select pl).ToList<tblPlayer>();
             }
             foreach(tblPlayer player in _players)
             {
-                int number = 0;
+                int number;
                 int? test = player.PlayerNmbr as int?;
 
                 if (test.HasValue)
                     number = test.Value;
                 else
                     number = 0;
-                
 
                 Position position = new Position { ID = player.tblPosition.ID, PosName = player.tblPosition.Position };
-                players.Add(new Player { Name = player.Name, FirstName = player.FirstName, BirthDate = player.BirthDate, Goals = player.Goals, Height = player.Height, ID = player.ID, PicturePath = @"Images\"+player.PicturePath, PlayedGames = player.PlayedGames, Position = position, PlayerNumber = number });
+                Team team;
+                if (teamID > -1)
+                    team = new Team { ID = player.tblTeam.ID, PicturePath = DefaultPicturePath + player.tblTeam.PicturePath, CountryName = player.tblTeam.Country };
+                else
+                    team = new Team();
+                players.Add(new Player { Name = player.Name, FirstName = player.FirstName, BirthDate = player.BirthDate, Goals = player.Goals, Height = player.Height, ID = player.ID, PicturePath = DefaultPicturePath + player.PicturePath, PlayedGames = player.PlayedGames, Position = position, PlayerNumber = number, Team = team });
             }
 
             return players;
@@ -52,6 +61,22 @@ namespace FussballManager.DataAccess
             }
 
             return positions;
+        }
+
+        public List<Team> LoadAllTeams()
+        {
+            List<tblTeam> _teams;
+            List<Team> teams = new List<Team>();
+            using (FootballMngmtEntities context = new FootballMngmtEntities())
+            {
+                _teams = context.tblTeams.ToList<tblTeam>();
+            }
+            foreach (tblTeam team in _teams)
+            {
+                teams.Add(new Team { ID = team.ID, CountryName = team.Country, PicturePath = DefaultPicturePath + team.PicturePath  });
+            }
+
+            return teams;
         }
     }
 }

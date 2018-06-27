@@ -6,20 +6,23 @@
         xmlns:local="clr-namespace:FussballManager"
         xmlns:viewModel="clr-namespace:FussballManager.ViewModel"
         mc:Ignorable="d"
-        Title="FussballManager" Height="437.739" Width="846.587">
+        Title="FussballManager" Height="437.739" Width="849.254">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" VerticalAlignment="Top" Width="190">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <ListView Name="lstvTeams" ItemsSource="{Binding AllTeams}" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="lstvTeams_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <Image DockPanel.Dock="Left" Source="{Binding PicturePath}" Stretch="Fill" Width="60" Height="30" />
+                        <Label DockPanel.Dock="Left" Content="{Binding CountryName}" FontWeight="Bold" FontSize="11" />
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <ListView Name="lstvTeamPlayers" ItemsSource="{Binding SelPlayers}" HorizontalAlignment="Left" Height="388" Margin="242,10,0,0" VerticalAlignment="Top" Width="243" SelectionChanged="lstvTeamPlayers_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="True">
-                        <Image DockPanel.Dock="Left" Source="{Binding PicPath}" Stretch="Fill" Width="60" Height="60" />
+                        <Image DockPanel.Dock="Left" Source="{Binding Player.PicturePath}" Stretch="Fill" Width="60" Height="60" />
                         <Label DockPanel.Dock="Top" Content="{Binding CompleteName}" FontWeight="Bold" FontSize="11" />
                         <Label Content="{Binding PositionName}" Foreground="#FF8D8282" FontStyle="Italic" FontWeight="Bold"/>
                     </DockPanel>
@@ -28,23 +31,14 @@
         </ListView>
         <Label Content="Name" HorizontalAlignment="Left" Margin="520,116,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
         <Image Source="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Height="101" Margin="702,10,0,0" VerticalAlignment="Top" Width="101" Stretch="Fill"/>
-
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,118,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Name}" VerticalAlignment="Top" Width="190" FontSize="10"/>
         <Label Content="Vorname" HorizontalAlignment="Left" Margin="520,142,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
-        <TextBox Text="{Binding SelPlayer.Player.FirstName}" HorizontalAlignment="Left" Height="21" Margin="613,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="10"/>
         <Label Content="Position" HorizontalAlignment="Left" Margin="520,168,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
         <Label Content="Team" HorizontalAlignment="Left" Margin="520,194,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
         <Label Content="Geburtsdatum" HorizontalAlignment="Left" Margin="520,222,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,222,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.BirthDate}" VerticalAlignment="Top" Width="190" FontSize="10"/>
         <Label Content="Grösse [cm]" HorizontalAlignment="Left" Margin="520,246,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
         <Label Content="Anzahl Spiele" HorizontalAlignment="Left" Margin="520,272,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,248,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Height}" VerticalAlignment="Top" Width="190" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,274,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayedGames}" VerticalAlignment="Top" Width="190" FontSize="10"/>
         <Label Content="Anzahl Tore" HorizontalAlignment="Left" Margin="520,298,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,300,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Goals}" VerticalAlignment="Top" Width="190" FontSize="10"/>
-        <ComboBox Name="cmbTest" ItemsSource="{Binding AllPositions}" DisplayMemberPath="PosName" HorizontalAlignment="Left" Margin="613,169,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="cmbTest_SelectionChanged"/>
         <Label Content="Spielernummer" HorizontalAlignment="Left" Margin="520,88,0,0" VerticalAlignment="Top" Width="88" HorizontalContentAlignment="Right" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Height="21" Margin="613,92,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayerNumber}" VerticalAlignment="Top" Width="79" FontSize="10"/>
         <Label Content="Spieler Daten" HorizontalAlignment="Left" Margin="624,192,-193,0" VerticalAlignment="Top" Width="408" HorizontalContentAlignment="Center" FontSize="11" RenderTransformOrigin="0.5,0.5" Background="#FFB5EA9D" FontWeight="Bold">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -75,5 +69,17 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        <Grid Name="grdPlayerData" HorizontalAlignment="Left" Height="243" Margin="613,88,0,0" VerticalAlignment="Top" Width="201">
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,3,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayerNumber}" VerticalAlignment="Top" Width="56" FontSize="10"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,29,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Name}" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox Text="{Binding SelPlayer.Player.FirstName}" HorizontalAlignment="Left" Height="21" Margin="3,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <ComboBox Name="cmbPosition" ItemsSource="{Binding AllPositions}" DisplayMemberPath="PosName" HorizontalAlignment="Left" Margin="3,84,0,0" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <ComboBox Name="cmbTeam" ItemsSource="{Binding AllTeams}" DisplayMemberPath="CountryName" HorizontalAlignment="Left" Margin="3,109,0,0" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,135,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.BirthDate}" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,161,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Height}" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,187,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayedGames}" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="3,211,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Goals}" VerticalAlignment="Top" Width="190" FontSize="10"/>
+        </Grid>
+        <Button Name="btnFreePlayers" Content="Freie Spieler" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" Width="190" Click="btnFreePlayers_Click"/>
     </Grid>
 </Window>

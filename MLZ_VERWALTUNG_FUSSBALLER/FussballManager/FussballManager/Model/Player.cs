@@ -16,7 +16,7 @@ namespace FussballManager.Model
         public int PlayedGames { get; set; }
         public int Goals { get; set; }
         public string PicturePath { get; set; }
-        public string Team { get; set; }
+        public Team Team { get; set; }
         public int PlayerNumber { get; set; }
         public Position Position { get; set; }
     }

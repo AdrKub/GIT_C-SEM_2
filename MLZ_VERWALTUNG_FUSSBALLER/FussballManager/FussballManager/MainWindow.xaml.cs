@@ -30,21 +30,37 @@ namespace FussballManager
 
             viewModel = new TestViewModel();
             DataContext = viewModel;
+            EnableChangeOrInputData(false);
         }
 
-        private void cmbTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EnableChangeOrInputData(bool mode)
         {
-
-
+            grdPlayerData.IsEnabled = mode;
         }
 
         private void lstvTeamPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(lstvTeamPlayers.SelectedIndex > -1)
             {
-                //viewModel.SelPlayer = viewModel.SelPlayers[lstvTeamPlayers.SelectedIndex];
-                viewModel.SelPlayer.Player = viewModel.SelPlayers[lstvTeamPlayers.SelectedIndex].Player;
+                viewModel.LoadPlayer(lstvTeamPlayers.SelectedIndex);
+                cmbPosition.SelectedIndex = viewModel.GetPlayerPositionIndex();
+                cmbTeam.SelectedIndex = viewModel.GetPlayerTeamIndex();
             }
+        }
+
+        private void lstvTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstvTeams.SelectedIndex > -1)
+            {
+                viewModel.LoadAllTeamPlayers(lstvTeams.SelectedIndex);
+                cmbPosition.SelectedIndex = -1;
+                cmbTeam.SelectedIndex = -1;
+            }
+        }
+
+        private void btnFreePlayers_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.LoadAllTeamPlayers(-1);
         }
     }
 }
