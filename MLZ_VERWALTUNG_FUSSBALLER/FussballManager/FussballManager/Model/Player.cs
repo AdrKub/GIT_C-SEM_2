@@ -19,5 +19,8 @@ namespace FussballManager.Model
         public Team Team { get; set; }
         public int PlayerNumber { get; set; }
         public Position Position { get; set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
     }
 }

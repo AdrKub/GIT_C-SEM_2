@@ -12,7 +12,8 @@ namespace FussballManager.ViewModel
     public class TestViewModel
     {
         private TeamPlayerRepository footballRepository = new TeamPlayerRepository();
-        private Player EmptyPlayer;
+        private Player TemporaryPlayer;
+        private int actTeamIndex = -1;
 
         public ObservableCollection<PlayerViewModel> SelPlayers { get; set; }
         public ObservableCollection<Position> AllPositions { get; set; }
@@ -20,18 +21,17 @@ namespace FussballManager.ViewModel
         public PlayerViewModel SelPlayer { get; set; }
 
 
+        public ICommand RequestChangePlayerData { get { return new RelayCommand(RequestChangePlayerDataExecute, RequestChangePlayerDataCanExecute); } }
+        public ICommand ChangeDataAbortion { get { return new RelayCommand(ChangeDataAbortionExecute, ChangeDataAbortionCanExecute); } }
+        public ICommand SaveDataChanges { get { return new RelayCommand(SaveDataChangesExecute, SaveDataChangesCanExecute); } }
+
         public TestViewModel()
         {
             SelPlayers = new ObservableCollection<PlayerViewModel>();
             AllPositions = new ObservableCollection<Position>();
             AllTeams = new ObservableCollection<Team>();
-            EmptyPlayer = new Player();
-            SelPlayer = new PlayerViewModel(EmptyPlayer);
-
-            //foreach(Player pl in footballRepository.TestLoadPlayers())
-            //{
-            //    SelPlayers.Add(new PlayerViewModel(pl));
-            //}
+            TemporaryPlayer = new Player();
+            SelPlayer = new PlayerViewModel(null);
 
             foreach (Position pos in footballRepository.LoadAllPositions())
             {
@@ -47,6 +47,7 @@ namespace FussballManager.ViewModel
         public void LoadAllTeamPlayers(int listIndex)
         {
             int teamID;
+            actTeamIndex = listIndex;
 
             if (listIndex == -1)
                 teamID = listIndex;
@@ -54,7 +55,7 @@ namespace FussballManager.ViewModel
                 teamID = AllTeams[listIndex].ID;
 
             SelPlayers.Clear();
-            SelPlayer.Player = EmptyPlayer;
+            SelPlayer.Player = null;
             foreach (Player pl in footballRepository.LoadPlayersWithTeam(teamID))
             {
                 SelPlayers.Add(new PlayerViewModel(pl));
@@ -87,6 +88,70 @@ namespace FussballManager.ViewModel
             }
             return index;
         }
+
+        public void SetPlayerPosition(int listIndex)
+        {
+            if(listIndex != -1)
+            {
+                if (SelPlayer.Player.Position.ID != AllPositions[listIndex].ID)
+                    SelPlayer.Player.Position = AllPositions[listIndex];
+            }
+        }
+
+        public void SetPlayerTeam(int listIndex)
+        {
+            if(listIndex != -1)
+            {
+                if (SelPlayer.Player.Team.ID != AllTeams[listIndex].ID)
+                    SelPlayer.Player.Team = AllTeams[listIndex];
+            }
+        }
+
+        public void RemoveTeam()
+        {
+            if (SelPlayer.Player != null)
+                SelPlayer.Player.Team.ID = 0;
+        }
+
+        #region COMMANDS
+        void RequestChangePlayerDataExecute()
+        {
+
+        }
+
+        bool RequestChangePlayerDataCanExecute()
+        {
+            if (SelPlayer.Player != null)
+                return true;
+            else
+                return false;
+        }
+
+        void ChangeDataAbortionExecute()
+        {
+            
+        }
+
+        bool ChangeDataAbortionCanExecute()
+        {
+            if (SelPlayer.Player != null)
+                return true;
+            else
+                return false;
+        }
+
+        void SaveDataChangesExecute()
+        {
+            footballRepository.UpdatePlayer(SelPlayer.Player);
+            LoadAllTeamPlayers(actTeamIndex);
+        }
+
+        bool SaveDataChangesCanExecute()
+        {
+            return true;
+        }
+
+        #endregion
 
 
     }

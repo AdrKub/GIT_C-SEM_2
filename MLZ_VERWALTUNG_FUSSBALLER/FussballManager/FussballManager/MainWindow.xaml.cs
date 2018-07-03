@@ -35,32 +35,91 @@ namespace FussballManager
 
         private void EnableChangeOrInputData(bool mode)
         {
-            grdPlayerData.IsEnabled = mode;
+            GrdPlayerData.IsEnabled = mode;
         }
 
-        private void lstvTeamPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ChangeActiveMenu(Label activeMenu)
         {
-            if(lstvTeamPlayers.SelectedIndex > -1)
+            SolidColorBrush gray = new SolidColorBrush(Color.FromArgb(0xFF, 0xCD, 0xCD, 0xCD));
+            SolidColorBrush green = new SolidColorBrush(Color.FromArgb(0xFF, 0xB5, 0xEA, 0x9D));
+            LblMenuPlayer.Background = gray;
+            LblMenuPlayers.Background = gray;
+            LblMenuTeams.Background = gray;
+            activeMenu.Background = green;
+        }
+
+        private void RefreshPlayerList()
+        {
+            if (LstvTeams.SelectedIndex > -1)
             {
-                viewModel.LoadPlayer(lstvTeamPlayers.SelectedIndex);
-                cmbPosition.SelectedIndex = viewModel.GetPlayerPositionIndex();
-                cmbTeam.SelectedIndex = viewModel.GetPlayerTeamIndex();
+                ChangeActiveMenu(LblMenuPlayers);
+                viewModel.LoadAllTeamPlayers(LstvTeams.SelectedIndex);
+                CmbPosition.SelectedIndex = -1;
+                CmbTeam.SelectedIndex = -1;
             }
         }
 
-        private void lstvTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstvTeamPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstvTeams.SelectedIndex > -1)
+            if(LstvTeamPlayers.SelectedIndex > -1)
             {
-                viewModel.LoadAllTeamPlayers(lstvTeams.SelectedIndex);
-                cmbPosition.SelectedIndex = -1;
-                cmbTeam.SelectedIndex = -1;
+                ChangeActiveMenu(LblMenuPlayer);
+                viewModel.LoadPlayer(LstvTeamPlayers.SelectedIndex);
+                CmbPosition.SelectedIndex = viewModel.GetPlayerPositionIndex();
+                CmbTeam.SelectedIndex = viewModel.GetPlayerTeamIndex();
             }
         }
 
-        private void btnFreePlayers_Click(object sender, RoutedEventArgs e)
+        private void LstvTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshPlayerList();
+        }
+
+        private void BtnFreePlayers_Click(object sender, RoutedEventArgs e)
         {
             viewModel.LoadAllTeamPlayers(-1);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EnableChangeOrInputData(true);
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            //RefreshPlayerList();
+            EnableChangeOrInputData(false);
+        }
+
+        private void ImgPlayer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LblMenuPlayer.Background = new SolidColorBrush(Color.FromRgb(255,0,0));
+        }
+
+        private void ImgPlayer_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CmbPosition_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.SetPlayerPosition(CmbPosition.SelectedIndex);
+        }
+
+        private void CmbTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.SetPlayerTeam(CmbTeam.SelectedIndex);
+        }
+
+        private void BtnDeleteTeam_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.RemoveTeam();
+            CmbTeam.SelectedIndex = -1;
+        }
+
+        private void TextBox_TextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }

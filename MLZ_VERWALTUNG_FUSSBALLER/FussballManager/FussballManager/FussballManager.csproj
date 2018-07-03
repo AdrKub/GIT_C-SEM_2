@@ -69,6 +69,7 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Model\Team.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -155,30 +156,6 @@
       <DependentUpon>FootballManagerDB.edmx</DependentUpon>
       <LastGenOutput>FootballManagerDB.cs</LastGenOutput>
     </Content>
-    <Resource Include="Images\breelEmbolo.png" />
-    <Resource Include="Images\ctry_deutschland.png" />
-    <Resource Include="Images\ctry_schweiz.png" />
-    <Resource Include="Images\gelsonFernandes.png" />
-    <Resource Include="Images\harisSeverovic.png" />
-    <Resource Include="Images\jeromeBoateng.png" />
-    <Resource Include="Images\jonasHector.png" />
-    <Resource Include="Images\julianBrandt.png" />
-    <Resource Include="Images\julianDraxler.png" />
-    <Resource Include="Images\kevinTrapp.png" />
-    <Resource Include="Images\manuelNeuer.png" />
-    <Resource Include="Images\marcoReus.png" />
-    <Resource Include="Images\marioGomez.png" />
-    <Resource Include="Images\matsHummels.png" />
-    <Resource Include="Images\michaelLang.png" />
-    <Resource Include="Images\ricardoRodriguez.png" />
-    <Resource Include="Images\romanBuerki.png" />
-    <Resource Include="Images\stephanLichtsteiner.png" />
-    <Resource Include="Images\stevenZuber.png" />
-    <Resource Include="Images\thomasMueller.png" />
-    <Resource Include="Images\toniKroos.png" />
-    <Resource Include="Images\valonBehrami.png" />
-    <Resource Include="Images\yannSommer.png" />
-    <Resource Include="Images\yvonMvogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using FussballManager.Model;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace FussballManager.DataAccess
 {
     public class TeamPlayerRepository
     {
-        private string DefaultPicturePath = @"Images\";
+        //private string DefaultPicturePath = @"\Images\";
+        private string DefaultPicturePath = Path.GetFullPath(@"Pictures\");
 
         //Alle vorhandenen Badges laden
         public List<Player> LoadPlayersWithTeam(int teamID)
@@ -41,7 +43,7 @@ namespace FussballManager.DataAccess
                     team = new Team { ID = player.tblTeam.ID, PicturePath = DefaultPicturePath + player.tblTeam.PicturePath, CountryName = player.tblTeam.Country };
                 else
                     team = new Team();
-                players.Add(new Player { Name = player.Name, FirstName = player.FirstName, BirthDate = player.BirthDate, Goals = player.Goals, Height = player.Height, ID = player.ID, PicturePath = DefaultPicturePath + player.PicturePath, PlayedGames = player.PlayedGames, Position = position, PlayerNumber = number, Team = team });
+                players.Add(new Player { Name = player.Name, FirstName = player.FirstName, BirthDate = player.BirthDate, Goals = player.Goals, Height = player.Height, ID = player.ID, PicturePath = DefaultPicturePath + player.PicturePath, PlayedGames = player.PlayedGames, Position = position, PlayerNumber = number, Team = team, Day = player.BirthDate.Day, Month = player.BirthDate.Month, Year = player.BirthDate.Year });
             }
 
             return players;
@@ -78,5 +80,30 @@ namespace FussballManager.DataAccess
 
             return teams;
         }
+
+        public void UpdatePlayer(Player player)
+        {
+            using (FootballMngmtEntities context = new FootballMngmtEntities())
+            {
+                tblPlayer actpl = (from p in context.tblPlayers where p.ID == player.ID select p).FirstOrDefault();
+                actpl.FirstName = player.FirstName;
+                actpl.Name = player.Name;
+                actpl.BirthDate = player.BirthDate;
+                actpl.Goals = player.Goals;
+                actpl.PicturePath = Path.GetFileName(player.PicturePath);
+                actpl.Height = player.Height;
+                actpl.PlayedGames = player.PlayedGames;
+                actpl.Position_ID = player.Position.ID;
+                if (player.Team.ID > 0)
+                    actpl.Team_ID = player.Team.ID;
+                else
+                    actpl.Team_ID = null;
+
+                context.SaveChanges();
+
+            }
+        }
+
+
     }
 }
