@@ -22,15 +22,18 @@ namespace FussballManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TestViewModel viewModel;
+        private MainViewModel viewModel;
+        private InputValidation goalsinputvalidation;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            viewModel = new TestViewModel();
+            viewModel = new MainViewModel();
             DataContext = viewModel;
             EnableChangeOrInputData(false);
+
+            goalsinputvalidation = new InputValidation(100, 0);
         }
 
         private void EnableChangeOrInputData(bool mode)
@@ -120,6 +123,16 @@ namespace FussballManager
         private void TextBox_TextInput(object sender, TextCompositionEventArgs e)
         {
 
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (goalsinputvalidation.ValidateInput(TxtBGoals.Text) == false)
+            {
+                LblMenuPlayer.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            }
+            else
+                ChangeActiveMenu(LblMenuPlayer);
         }
     }
 }
