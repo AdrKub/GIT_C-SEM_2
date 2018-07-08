@@ -11,7 +11,7 @@ namespace FussballManager.DataAccess
 {
     public class TeamPlayerRepository
     {
-        private string DefaultPicturePath = Path.GetFullPath(@"..\..\Pictures\");
+        public string DefaultPicturePath = Path.GetFullPath(@"..\..\Pictures\");
 
         //Alle vorhandenen Badges laden
         public List<Player> LoadPlayersWithTeam(int teamID)
@@ -102,6 +102,24 @@ namespace FussballManager.DataAccess
             }
         }
 
+        public void AddPlayer(Player player)
+        {
+            using (FootballMngmtEntities context = new FootballMngmtEntities())
+            {
+                tblPlayer actpl = new tblPlayer { Name = player.Name, FirstName = player.FirstName, BirthDate = player.BirthDate, Goals = player.Goals, Height = player.Height, PicturePath = Path.GetFileName(player.PicturePath), PlayedGames = player.PlayedGames, PlayerNmbr = player.PlayerNumber, Position_ID = player.Position.ID };
+                context.tblPlayers.Add(actpl);
+                context.SaveChanges();
+            }
 
+        }
+
+        public void DeletePlayer(Player player)
+        {
+            using (FootballMngmtEntities context = new FootballMngmtEntities())
+            {
+                context.tblPlayers.Remove(a => a.ID == 1));
+                context.SaveChanges();
+            }
+        }
     }
 }

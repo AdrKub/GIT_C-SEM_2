@@ -69,25 +69,26 @@
             </Label.RenderTransform>
         </Label>
         <Grid Name="GrdPlayerData" HorizontalAlignment="Left" Height="243" Margin="661,88,0,0" VerticalAlignment="Top" Width="201">
-            <TextBox Name="TxtBPlayerNmbr" HorizontalAlignment="Left" Height="21" Margin="3,3,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayerNumber}" VerticalAlignment="Top" Width="56" FontSize="10"/>
-            <TextBox Name="TxtBName" HorizontalAlignment="Left" Height="21" Margin="3,29,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Name}" VerticalAlignment="Top" Width="188" FontSize="10"/>
-            <TextBox Name="TxtBFirstName" Text="{Binding SelPlayer.Player.FirstName}" HorizontalAlignment="Left" Height="21" Margin="3,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="10"/>
+            <TextBox Name="TxtBPlayerNmbr" HorizontalAlignment="Left" Height="21" Margin="3,3,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayerNumber}" VerticalAlignment="Top" Width="56" FontSize="10" TextChanged="TxtBPlayerNmbr_TextChanged"/>
+            <TextBox Name="TxtBName" HorizontalAlignment="Left" Height="21" Margin="3,29,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Name}" VerticalAlignment="Top" Width="188" FontSize="10" TextChanged="TxtBName_TextChanged"/>
+            <TextBox Name="TxtBFirstName" Text="{Binding SelPlayer.Player.FirstName}" HorizontalAlignment="Left" Height="21" Margin="3,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="10" TextChanged="TxtBFirstName_TextChanged"/>
             <ComboBox Name="CmbPosition" ItemsSource="{Binding AllPositions}" DisplayMemberPath="PosName" HorizontalAlignment="Left" Margin="3,84,0,0" VerticalAlignment="Top" Width="190" FontSize="10" SelectionChanged="CmbPosition_SelectionChanged"/>
             <ComboBox Name="CmbTeam" ItemsSource="{Binding AllTeams}" DisplayMemberPath="CountryName" HorizontalAlignment="Left" Margin="3,109,0,0" VerticalAlignment="Top" Width="154" FontSize="10" SelectionChanged="CmbTeam_SelectionChanged"/>
-            <TextBox Name="TxtBHeight" HorizontalAlignment="Left" Height="21" Margin="3,161,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Height}" VerticalAlignment="Top" Width="190" FontSize="10" TextInput="TextBox_TextInput"/>
-            <TextBox Name="TxtBPlayedGames" HorizontalAlignment="Left" Height="21" Margin="3,187,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayedGames}" VerticalAlignment="Top" Width="190" FontSize="10"/>
-            <TextBox Name="TxtBGoals" HorizontalAlignment="Left" Height="21" Margin="3,211,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Goals}" VerticalAlignment="Top" Width="190" FontSize="10" TextChanged="TextBox_TextChanged"/>
+            <TextBox Name="TxtBHeight" HorizontalAlignment="Left" Height="21" Margin="3,161,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Height}" VerticalAlignment="Top" Width="190" FontSize="10" TextChanged="TxtBHeight_TextChanged"/>
+            <TextBox Name="TxtBPlayedGames" HorizontalAlignment="Left" Height="21" Margin="3,187,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.PlayedGames}" VerticalAlignment="Top" Width="190" FontSize="10" TextChanged="TxtBPlayedGames_TextChanged"/>
+            <TextBox Name="TxtBGoals" HorizontalAlignment="Left" Height="21" Margin="3,211,0,0" TextWrapping="Wrap" Text="{Binding SelPlayer.Player.Goals}" VerticalAlignment="Top" Width="190" FontSize="10" TextChanged="TxtBGoals_TextChanged"/>
             <Button Name="BtnDeleteTeam" Content="X" HorizontalAlignment="Left" Margin="165,109,0,0" VerticalAlignment="Top" Width="26" Click="BtnDeleteTeam_Click" Height="19" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
-            <DatePicker DisplayDate="{Binding SelPlayer.Player.BirthDate}" SelectedDate="{Binding SelPlayer.Player.BirthDate}" HorizontalAlignment="Left" Margin="3,133,0,0" VerticalAlignment="Top" Width="113"/>
+            <DatePicker Name="DtpBirthDate" DisplayDate="{Binding SelPlayer.Player.BirthDate}" SelectedDate="{Binding SelPlayer.Player.BirthDate}" HorizontalAlignment="Left" Margin="3,133,0,0" VerticalAlignment="Top" Width="113" SelectedDateChanged="DtpBirthDate_SelectedDateChanged"/>
         </Grid>
         <Button Name="BtnFreePlayers" Content="Freie Spieler" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" Width="190" Click="BtnFreePlayers_Click"/>
         <Image Name="ImgCountry" Source="{Binding SelPlayer.Player.Team.PicturePath}" HorizontalAlignment="Left" Height="30" Margin="662,53,0,0" VerticalAlignment="Top" Width="60" Stretch="Fill"/>
-        <Image Name="ImgPlayer" Source="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Height="101" Margin="751,10,0,0" VerticalAlignment="Top" Width="101" Stretch="Fill" MouseDown="ImgPlayer_MouseDown"/>
-        <Button Name="BtnChangeData" Content="Ändern" HorizontalAlignment="Left" Margin="522,339,0,0" VerticalAlignment="Top" Width="49" Click="Button_Click" Command="{Binding RequestChangePlayerData}"/>
-        <Button Name="BtnSaveChanges" Content="Speichern" HorizontalAlignment="Left" Margin="576,339,0,0" VerticalAlignment="Top" Width="65" Click="TestButton_Click" Command="{Binding SaveDataChanges}"/>
-        <Button Name="BtnDeletePlayer" Content="Löschen" HorizontalAlignment="Left" Margin="709,339,0,0" VerticalAlignment="Top" Width="54" Click="TestButton_Click" Command="{Binding DeletePlayer}"/>
-        <Button Name="BtnAbortion" Content="Abbruch" HorizontalAlignment="Left" Margin="646,339,0,0" VerticalAlignment="Top" Width="58" Click="TestButton_Click" Command="{Binding ChangeDataAbortion}"/>
-        <Button Name="BtnNewPlayer" Content="Neu" HorizontalAlignment="Left" Margin="768,339,0,0" VerticalAlignment="Top" Width="48" Click="TestButton_Click" Command="{Binding CreateNewPlayer}"/>
+        <Image Name="ImgPlayer" Source="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Height="101" Margin="751,10,0,0" VerticalAlignment="Top" Width="101" Stretch="Fill"/>
+        <Button Name="BtnChangeData" Content="Ändern" HorizontalAlignment="Left" Margin="522,339,0,0" VerticalAlignment="Top" Width="49" Command="{Binding RequestChangePlayerData}" Click="BtnChangeData_Click"/>
+        <Button Name="BtnSaveChanges" Content="Speichern" HorizontalAlignment="Left" Margin="576,339,0,0" VerticalAlignment="Top" Width="65" Command="{Binding SaveDataChanges}" Click="BtnSaveChanges_Click"/>
+        <Button Name="BtnDeletePlayer" Content="Löschen" HorizontalAlignment="Left" Margin="709,339,0,0" VerticalAlignment="Top" Width="54" Command="{Binding DeletePlayer}"/>
+        <Button Name="BtnAbortion" Content="Abbruch" HorizontalAlignment="Left" Margin="646,339,0,0" VerticalAlignment="Top" Width="58" Command="{Binding ChangeDataAbortion}" Click="BtnAbortion_Click"/>
+        <Button Name="BtnNewPlayer" Content="Neu" HorizontalAlignment="Left" Margin="768,339,0,0" VerticalAlignment="Top" Width="48" Command="{Binding CreateNewPlayer}" Click="BtnNewPlayer_Click"/>
         <Label Content="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Width="753"/>
+        <Label Name="LblError" Content="" HorizontalAlignment="Left" Margin="522,372,0,0" VerticalAlignment="Top" Width="294" FontWeight="Bold" Foreground="#FFFF0C0C"/>
     </Grid>
 </Window>

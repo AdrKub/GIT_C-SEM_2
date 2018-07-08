@@ -23,7 +23,9 @@ namespace FussballManager
     public partial class MainWindow : Window
     {
         private MainViewModel viewModel;
-        private InputValidation goalsinputvalidation;
+        private SolidColorBrush gray = new SolidColorBrush(Color.FromArgb(0xFF, 0xCD, 0xCD, 0xCD));
+        private SolidColorBrush green = new SolidColorBrush(Color.FromArgb(0xFF, 0xB5, 0xEA, 0x9D));
+        private SolidColorBrush red = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 
         public MainWindow()
         {
@@ -32,8 +34,6 @@ namespace FussballManager
             viewModel = new MainViewModel();
             DataContext = viewModel;
             EnableChangeOrInputData(false);
-
-            goalsinputvalidation = new InputValidation(100, 0);
         }
 
         private void EnableChangeOrInputData(bool mode)
@@ -43,12 +43,26 @@ namespace FussballManager
 
         private void ChangeActiveMenu(Label activeMenu)
         {
-            SolidColorBrush gray = new SolidColorBrush(Color.FromArgb(0xFF, 0xCD, 0xCD, 0xCD));
-            SolidColorBrush green = new SolidColorBrush(Color.FromArgb(0xFF, 0xB5, 0xEA, 0x9D));
             LblMenuPlayer.Background = gray;
             LblMenuPlayers.Background = gray;
             LblMenuTeams.Background = gray;
             activeMenu.Background = green;
+        }
+
+        private void ClearPlayerData()
+        {
+            EnableChangeOrInputData(false);
+            ChangeActiveMenu(LblMenuPlayer);
+            LblError.Content = "";
+            CmbPosition.SelectedIndex = -1;
+            CmbTeam.SelectedIndex = -1;
+            LstvTeams.IsEnabled = true;
+            LstvTeamPlayers.IsEnabled = true;
+        }
+
+        private void InputNotValid()
+        {
+            LblMenuPlayer.Background = red;
         }
 
         private void RefreshPlayerList()
@@ -57,8 +71,6 @@ namespace FussballManager
             {
                 ChangeActiveMenu(LblMenuPlayers);
                 viewModel.LoadAllTeamPlayers(LstvTeams.SelectedIndex);
-                CmbPosition.SelectedIndex = -1;
-                CmbTeam.SelectedIndex = -1;
             }
         }
 
@@ -76,32 +88,12 @@ namespace FussballManager
         private void LstvTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshPlayerList();
+            ClearPlayerData();
         }
 
         private void BtnFreePlayers_Click(object sender, RoutedEventArgs e)
         {
             viewModel.LoadAllTeamPlayers(-1);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            EnableChangeOrInputData(true);
-        }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            //RefreshPlayerList();
-            EnableChangeOrInputData(false);
-        }
-
-        private void ImgPlayer_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            LblMenuPlayer.Background = new SolidColorBrush(Color.FromRgb(255,0,0));
-        }
-
-        private void ImgPlayer_GotFocus(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void CmbPosition_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -120,19 +112,167 @@ namespace FussballManager
             CmbTeam.SelectedIndex = -1;
         }
 
-        private void TextBox_TextInput(object sender, TextCompositionEventArgs e)
+        private void TxtBGoals_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.Validation.ValidateGoals(TxtBGoals.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
+        }
+
+        private void TxtBPlayedGames_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.Validation.ValidatePalyedGames(TxtBPlayedGames.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtBHeight_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (goalsinputvalidation.ValidateInput(TxtBGoals.Text) == false)
+            if (viewModel.InputEnable)
             {
-                LblMenuPlayer.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                if (viewModel.Validation.ValidateHeight(TxtBHeight.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
             }
-            else
-                ChangeActiveMenu(LblMenuPlayer);
+        }
+
+        private void DtpBirthDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (viewModel.InputEnable)
+            {
+                if(DtpBirthDate.SelectedDate != null)
+                {
+                    if (viewModel.ValidBirthDate((DateTime)DtpBirthDate.SelectedDate, out string error))
+                    {
+                        ChangeActiveMenu(LblMenuPlayer);
+                        LblError.Content = "";
+                    }
+                    else
+                    {
+                        InputNotValid();
+                        LblError.Content = error.ToUpper();
+                    }
+                }
+            }
+        }
+
+        private void TxtBFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.Validation.ValidateFirstName(TxtBFirstName.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
+        }
+
+        private void TxtBName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.Validation.ValidateName(TxtBName.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
+        }
+
+        private void TxtBPlayerNmbr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.ValidPlayerNumber(TxtBPlayerNmbr.Text, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
+        }
+
+        private void BtnChangeData_Click(object sender, RoutedEventArgs e)
+        {
+            EnableChangeOrInputData(true);
+            LstvTeams.IsEnabled = false;
+            LstvTeamPlayers.IsEnabled = false;
+        }
+
+        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            ClearPlayerData();
+        }
+
+        private void BtnAbortion_Click(object sender, RoutedEventArgs e)
+        {
+            ClearPlayerData();
+        }
+
+        private void BtnNewPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.LoadNewPlayer();
+            EnableChangeOrInputData(true);
+            CmbPosition.SelectedIndex = viewModel.GetPlayerPositionIndex();
+            ChangeActiveMenu(LblMenuPlayer);
+            LstvTeams.IsEnabled = false;
+            LstvTeamPlayers.IsEnabled = false;
+            if (viewModel.InputEnable)
+            {
+                if (viewModel.ValidBirthDate((DateTime)DtpBirthDate.SelectedDate, out string error))
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+                else
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                }
+            }
         }
     }
 }
