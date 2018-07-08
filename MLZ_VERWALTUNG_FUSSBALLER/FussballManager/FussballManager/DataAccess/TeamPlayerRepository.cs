@@ -117,7 +117,8 @@ namespace FussballManager.DataAccess
         {
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {
-                context.tblPlayers.Remove(a => a.ID == 1));
+                tblPlayer actpl = (from p in context.tblPlayers where p.ID == player.ID select p).FirstOrDefault();
+                context.tblPlayers.Remove(actpl);
                 context.SaveChanges();
             }
         }

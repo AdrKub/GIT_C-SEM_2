@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FussballManager.ViewModel;
 using FussballManager.Model;
+using Microsoft.Win32;
+using System.IO;
 
 namespace FussballManager
 {
@@ -36,9 +38,28 @@ namespace FussballManager
             EnableChangeOrInputData(false);
         }
 
+        private void Test()
+        {
+            string _path;
+            string oldPath = ;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Title = "Bild hinzufügen";
+            openFileDialog.Filter = "jpg Dateien (*.jpg)|*.jpg|png Dateien (*.pgn)|*.png|Alle Dateien (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _path = openFileDialog.FileName;
+            }
+            else
+                _path = null;
+
+        }
+
         private void EnableChangeOrInputData(bool mode)
         {
             GrdPlayerData.IsEnabled = mode;
+
         }
 
         private void ChangeActiveMenu(Label activeMenu)
@@ -49,15 +70,82 @@ namespace FussballManager
             activeMenu.Background = green;
         }
 
+        private bool ShowYesOrNoMsgBox(string cont, string titel)
+        {
+            MessageBoxResult result = MessageBox.Show(cont,
+                                          titel,
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+                return true;
+            else
+                return false;
+        }
+
         private void ClearPlayerData()
         {
             EnableChangeOrInputData(false);
-            ChangeActiveMenu(LblMenuPlayer);
+            ChangeActiveMenu(LblMenuPlayers);
             LblError.Content = "";
             CmbPosition.SelectedIndex = -1;
             CmbTeam.SelectedIndex = -1;
             LstvTeams.IsEnabled = true;
             LstvTeamPlayers.IsEnabled = true;
+        }
+
+        private void InputDataValidation()
+        {
+            string error;
+            if (viewModel.InputEnable && viewModel.IsPlayerSelected())
+            {
+                if (viewModel.Validation.ValidateGoals(TxtBGoals.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.Validation.ValidatePalyedGames(TxtBPlayedGames.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.Validation.ValidateHeight(TxtBHeight.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.ValidBirthDate((DateTime)DtpBirthDate.SelectedDate, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.Validation.ValidateFirstName(TxtBFirstName.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.Validation.ValidateName(TxtBName.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else if(viewModel.ValidPlayerNumber(TxtBPlayerNmbr.Text, out error) == false)
+                {
+                    InputNotValid();
+                    LblError.Content = error.ToUpper();
+                    return;
+                }
+                else
+                {
+                    ChangeActiveMenu(LblMenuPlayer);
+                    LblError.Content = "";
+                }
+            }
         }
 
         private void InputNotValid()
@@ -112,127 +200,14 @@ namespace FussballManager
             CmbTeam.SelectedIndex = -1;
         }
 
-        private void TxtBGoals_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.Validation.ValidateGoals(TxtBGoals.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
-        }
-
-        private void TxtBPlayedGames_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.Validation.ValidatePalyedGames(TxtBPlayedGames.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
-
-        }
-
-        private void TxtBHeight_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.Validation.ValidateHeight(TxtBHeight.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
-        }
-
         private void DtpBirthDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (viewModel.InputEnable)
-            {
-                if(DtpBirthDate.SelectedDate != null)
-                {
-                    if (viewModel.ValidBirthDate((DateTime)DtpBirthDate.SelectedDate, out string error))
-                    {
-                        ChangeActiveMenu(LblMenuPlayer);
-                        LblError.Content = "";
-                    }
-                    else
-                    {
-                        InputNotValid();
-                        LblError.Content = error.ToUpper();
-                    }
-                }
-            }
+            InputDataValidation();
         }
 
-        private void TxtBFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.Validation.ValidateFirstName(TxtBFirstName.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
-        }
-
-        private void TxtBName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.Validation.ValidateName(TxtBName.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
-        }
-
-        private void TxtBPlayerNmbr_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (viewModel.InputEnable)
-            {
-                if (viewModel.ValidPlayerNumber(TxtBPlayerNmbr.Text, out string error))
-                {
-                    ChangeActiveMenu(LblMenuPlayer);
-                    LblError.Content = "";
-                }
-                else
-                {
-                    InputNotValid();
-                    LblError.Content = error.ToUpper();
-                }
-            }
+            InputDataValidation();
         }
 
         private void BtnChangeData_Click(object sender, RoutedEventArgs e)
@@ -273,6 +248,20 @@ namespace FussballManager
                     LblError.Content = error.ToUpper();
                 }
             }
+        }
+
+        private void BtnDeletePlayer_Click(object sender, RoutedEventArgs e)
+        {
+            if (ShowYesOrNoMsgBox("Datensatz wirklich löschen ?", "Löschen"))
+            {
+                viewModel.DeletePlayer();
+                ClearPlayerData();
+            } 
+        }
+
+        private void ImgPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Test();
         }
     }
 }

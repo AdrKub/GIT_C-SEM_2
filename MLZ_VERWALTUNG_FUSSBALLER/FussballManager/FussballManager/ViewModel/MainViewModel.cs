@@ -9,6 +9,7 @@ using System.Windows.Input;
 using FussballManager;
 using System.Globalization;
 
+
 namespace FussballManager.ViewModel
 {
     public class MainViewModel
@@ -31,12 +32,9 @@ namespace FussballManager.ViewModel
             get { return _inputEnable; }
         }
 
-
         public ICommand RequestChangePlayerData { get { return new RelayCommand(RequestChangePlayerDataExecute, RequestChangePlayerDataCanExecute); } }
         public ICommand ChangeDataAbortion { get { return new RelayCommand(ChangeDataAbortionExecute, ChangeDataAbortionCanExecute); } }
         public ICommand SaveDataChanges { get { return new RelayCommand(SaveDataChangesExecute, SaveDataChangesCanExecute); } }
-        public ICommand DeletePlayer { get { return new RelayCommand(DeletePlayerExecute, DeletePlayerCanExecute); } }
-        public ICommand CreateNewPlayer { get { return new RelayCommand(CreateNewPlayerExecute, CreateNewPlayerCanExecute); } }
 
         public MainViewModel()
         {
@@ -86,7 +84,8 @@ namespace FussballManager.ViewModel
 
         public void LoadNewPlayer()
         {
-            _newPlayer = new Player { Name = "New", FirstName = "Player", Height = 180, PlayedGames = 0, Goals = 0, PlayerNumber = 0, PicturePath = _footballRepository.DefaultPicturePath + "anonymus.jpg", BirthDate = DateTime.Now, Position = AllPositions[1] };
+            Team team = new Team { ID = 0 };
+            _newPlayer = new Player { Name = "New", FirstName = "Player", Height = 180, PlayedGames = 0, Goals = 0, PlayerNumber = 0, PicturePath = _footballRepository.DefaultPicturePath + "anonymus.jpg", BirthDate = DateTime.Now, Position = AllPositions[1], Team = team };
             SelPlayer.Player = _newPlayer;
             _resultValBirthDate = true;
             _resultValPlayerNmbr = true;
@@ -139,6 +138,27 @@ namespace FussballManager.ViewModel
         {
             if (SelPlayer.Player != null)
                 SelPlayer.Player.Team.ID = 0;
+        }
+
+        public bool IsPlayerSelected()
+        {
+            if (SelPlayer.Player == null)
+                return false;
+            else
+                return true;
+        }
+
+        public void DeletePlayer()
+        {
+            _footballRepository.DeletePlayer(SelPlayer.Player);
+            LoadAllTeamPlayers(_actTeamIndex);
+            _inputEnable = false;
+            _inputNewPlayer = false;
+        }
+
+        public void ChangePlayerPicture()
+        {
+            
         }
 
         private bool SaveEnable()
@@ -244,33 +264,6 @@ namespace FussballManager.ViewModel
         bool SaveDataChangesCanExecute()
         {
             if (SelPlayer.Player != null && _inputEnable && SaveEnable() && Validation.ResultOfValidation())
-                return true;
-            else
-                return false;
-        }
-
-        void DeletePlayerExecute()
-        {
-
-        }
-
-        bool DeletePlayerCanExecute()
-        {
-            if (SelPlayer.Player != null && _inputEnable == false)
-                return true;
-            else
-                return false;
-        }
-
-        void CreateNewPlayerExecute()
-        {
-            _inputNewPlayer = true;
-            Validation.InitValidation();
-        }
-
-        bool CreateNewPlayerCanExecute()
-        {
-            if (_inputEnable == false)
                 return true;
             else
                 return false;

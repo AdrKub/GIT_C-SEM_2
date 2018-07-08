@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChangePlayerPicture.cs" />
     <Compile Include="InputValidation.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Position.cs" />
