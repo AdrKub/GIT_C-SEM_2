@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FussballManager"
         xmlns:viewModel="clr-namespace:FussballManager.ViewModel"
         mc:Ignorable="d"
-        Title="FussballManager" Height="512.406" Width="913.921">
+        Title="Fussball Manager" Height="439.073" Width="913.921">
     <Grid>
         <ListView Name="LstvTeams" ItemsSource="{Binding AllTeams}" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="LstvTeams_SelectionChanged">
             <ListView.ItemTemplate>
@@ -88,7 +88,6 @@
         <Button Name="BtnDeletePlayer" Content="Löschen" HorizontalAlignment="Left" Margin="709,339,0,0" VerticalAlignment="Top" Width="54" Click="BtnDeletePlayer_Click"/>
         <Button Name="BtnAbortion" Content="Abbruch" HorizontalAlignment="Left" Margin="646,339,0,0" VerticalAlignment="Top" Width="58" Command="{Binding ChangeDataAbortion}" Click="BtnAbortion_Click"/>
         <Button Name="BtnNewPlayer" Content="Neu" HorizontalAlignment="Left" Margin="768,339,0,0" VerticalAlignment="Top" Width="48" Click="BtnNewPlayer_Click"/>
-        <Label Content="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Margin="10,434,0,0" VerticalAlignment="Top" Width="753"/>
         <Label Name="LblError" Content="" HorizontalAlignment="Left" Margin="522,372,0,0" VerticalAlignment="Top" Width="294" FontWeight="Bold" Foreground="#FFFF0C0C"/>
     </Grid>
 </Window>
