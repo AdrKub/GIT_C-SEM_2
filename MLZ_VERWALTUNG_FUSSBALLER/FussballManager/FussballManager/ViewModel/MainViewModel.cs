@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FussballManager.DataAccess;
 using FussballManager.Model;
 using System.Windows.Input;
-using FussballManager;
 using System.Globalization;
 
 
@@ -27,10 +23,12 @@ namespace FussballManager.ViewModel
         public ObservableCollection<Team> AllTeams { get; set; }
         public PlayerViewModel SelPlayer { get; set; }
         public InputValidation Validation;
-        public bool InputEnable
+        private ChangePlayerPicture PictureHandler;
+
+        public bool InputEnable //Rückgabe Änderungsmodus aktiv/inaktiv
         {
             get { return _inputEnable; }
-        }
+        } 
 
         public ICommand RequestChangePlayerData { get { return new RelayCommand(RequestChangePlayerDataExecute, RequestChangePlayerDataCanExecute); } }
         public ICommand ChangeDataAbortion { get { return new RelayCommand(ChangeDataAbortionExecute, ChangeDataAbortionCanExecute); } }
@@ -43,6 +41,7 @@ namespace FussballManager.ViewModel
             AllTeams = new ObservableCollection<Team>();
             SelPlayer = new PlayerViewModel(null);
             Validation = new InputValidation();
+            PictureHandler = new ChangePlayerPicture(_footballRepository.DefaultPicturePath);
 
             foreach (Position pos in _footballRepository.LoadAllPositions())
             {
@@ -57,7 +56,7 @@ namespace FussballManager.ViewModel
 
         #region FUNCTIONS / DB ACCESS
 
-        public void LoadAllTeamPlayers(int listIndex)
+        public void LoadAllTeamPlayers(int listIndex) //Alle Spieler des Teams laden
         {
             int teamID;
             _actTeamIndex = listIndex;
@@ -73,16 +72,16 @@ namespace FussballManager.ViewModel
             {
                 SelPlayers.Add(new PlayerViewModel(pl));
             }
-        }
+        } 
 
-        public void LoadPlayer(int listIndex)
+        public void LoadPlayer(int listIndex) //Selektierter Spieler im Team in Anzeige laden
         {
             SelPlayer.Player = SelPlayers[listIndex].Player;
             _resultValBirthDate = true;
             _resultValPlayerNmbr = true;
-        }
+        } 
 
-        public void LoadNewPlayer()
+        public void LoadNewPlayer() //Neuer Spieler mit standart Werten in Anzeige laden
         {
             Team team = new Team { ID = 0 };
             _newPlayer = new Player { Name = "New", FirstName = "Player", Height = 180, PlayedGames = 0, Goals = 0, PlayerNumber = 0, PicturePath = _footballRepository.DefaultPicturePath + "anonymus.jpg", BirthDate = DateTime.Now, Position = AllPositions[1], Team = team };
@@ -92,7 +91,7 @@ namespace FussballManager.ViewModel
             _inputEnable = true;
             _inputNewPlayer = true;
             Validation.InitValidation();
-        }
+        } 
 
         public int GetPlayerPositionIndex()
         {
@@ -134,40 +133,41 @@ namespace FussballManager.ViewModel
             }
         }
 
-        public void RemoveTeam()
+        public void RemoveTeam() //Team zugehörigkeit Spieler löschen
         {
             if (SelPlayer.Player != null)
                 SelPlayer.Player.Team.ID = 0;
-        }
+        } 
 
-        public bool IsPlayerSelected()
+        public bool IsPlayerSelected() //Rückgabe ob Spieler in Anzeige (selektiert) ist
         {
             if (SelPlayer.Player == null)
                 return false;
             else
                 return true;
-        }
+        }   
 
-        public void DeletePlayer()
+        public void DeletePlayer() //Anforderung Spieler löschen
         {
             _footballRepository.DeletePlayer(SelPlayer.Player);
             LoadAllTeamPlayers(_actTeamIndex);
             _inputEnable = false;
             _inputNewPlayer = false;
-        }
+        }   
 
-        public void ChangePlayerPicture()
+        public void ChangePlayerPicture() //Neues Spieler Bild definieren
         {
-            
-        }
+            PictureHandler.SetNewPicture(SelPlayer.Player);
+            SelPlayer.Player = SelPlayer.Player;
+        } 
 
-        private bool SaveEnable()
+        private bool SaveEnable() //Rückgabe Eingabe Validierung Spielernummer und Geburtstag
         {
             if (_resultValBirthDate && _resultValPlayerNmbr)
                 return true;
             else
                 return false;
-        }
+        } 
 
         #endregion
 
@@ -179,6 +179,7 @@ namespace FussballManager.ViewModel
             {
                 if (SelPlayer.Player.Team.ID > 0)
                 {
+                    //Kontrolle ob Spielernummer im Team bereits vorhanden ist
                     foreach (PlayerViewModel plvm in SelPlayers)
                     {
                         if (value == plvm.Player.PlayerNumber && SelPlayer.Player.ID != plvm.Player.ID)
@@ -203,6 +204,7 @@ namespace FussballManager.ViewModel
 
         public bool ValidBirthDate(DateTime input, out string errorText)
         {
+            //Kontrolle das Spieler älter ist als 18 und jünger als 45 Jahre
             if(input > DateTime.Now || input.Year < (DateTime.Now.Year - 45) || input.Year > (DateTime.Now.Year -18))
             {
                 errorText = "Datum ist ausserhalb Gültigkeitsbereich";
@@ -239,6 +241,7 @@ namespace FussballManager.ViewModel
         {
             _inputEnable = false;
             _inputNewPlayer = false;
+            PictureHandler.ThrowChanges();
             LoadAllTeamPlayers(_actTeamIndex);
         }
 
@@ -252,6 +255,7 @@ namespace FussballManager.ViewModel
 
         void SaveDataChangesExecute()
         {
+            PictureHandler.SaveNewPicture(SelPlayer.Player);
             if (_inputNewPlayer)
                 _footballRepository.AddPlayer(SelPlayer.Player);
             else

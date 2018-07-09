@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Win32;
 using FussballManager.Model;
 using System.IO;
@@ -12,7 +8,16 @@ namespace FussballManager
     public class ChangePlayerPicture
     {
         private string _picDirectoryPath;
-        private bool PictureExist(string picPath)
+        private string _oldPicturePath;
+        private string _newPicturePath;
+        private bool _pictureChanged = false;
+
+        public ChangePlayerPicture(string picDirectoryPath)
+        {
+            _picDirectoryPath = picDirectoryPath;
+        }
+
+        private bool PictureExist(string picPath) //Kontrolle ob Bild existiert
         {
             if (File.Exists(picPath))
                 return true;
@@ -22,20 +27,71 @@ namespace FussballManager
 
         private void DeletePicture(string picPath)
         {
-            File.Delete(picPath);
+            if(Path.GetFileNameWithoutExtension(picPath) != "anonymus")
+                File.Delete(picPath);
         }
 
-        private void SaveNewPicture(string picPath)
+        private bool SearchInDirectory(string pictureName) //Suchen ob Bildname schon vorhanden ist
         {
-            File.Copy(picPath, _picDirectoryPath);
+            List<string> allPicturesAtDirectory = new List<string>();
+            bool result = false;
+
+            //Alle vorhandenen Bilder laden
+            foreach (string picPath in Directory.GetFiles(_picDirectoryPath))
+            {
+                allPicturesAtDirectory.Add(picPath);
+            }
+
+            //Kontrolle ob Bildname schon vorhanden ist
+            foreach (string picturePath in allPicturesAtDirectory)
+            {
+                if (picturePath.Contains(pictureName) == true)
+                    result = true;
+            }
+            return result;
         }
 
-
-        public void SetNewPicture(Player player, string picDirectoryPath)
+        public void SaveNewPicture(Player player) //Neu definiertes Bild für Spieler speichern
         {
-            _picDirectoryPath = picDirectoryPath;
-            string newPath;
-            string oldPath = player.PicturePath;
+            if (_pictureChanged)
+            {
+                string newPictureName;
+                string newPicutreExtension;
+                string genPicturePath;
+
+                //Kontrolle ob neues Bild noch vorhanden ist
+                if (PictureExist(_newPicturePath))
+                {
+                    //Kontrolle ob altes Bild noch vorhanden ist -> löschen
+                    if (PictureExist(_oldPicturePath))
+                        DeletePicture(_oldPicturePath);
+                }
+
+                //Neuer Name für Bilddatei generieren
+                newPicutreExtension = Path.GetExtension(_newPicturePath);
+                newPictureName = $"{player.FirstName}{player.Name}{newPicutreExtension}";
+
+                //Kontrolle ob neuer Name bereits vorhanden ist
+                while (SearchInDirectory(newPictureName))
+                {
+                    newPictureName = $"{player.FirstName}{player.Name}_1{newPicutreExtension}";
+                }
+
+                //Neuer Pfad erzeugen und in Spieler speichern
+                genPicturePath = $"{_picDirectoryPath}{newPictureName}";
+
+                player.PicturePath = genPicturePath;
+
+                //Neues Bild in standard Verzeichniss mit neuem Namen kopieren
+                File.Copy(_newPicturePath, genPicturePath);
+                ThrowChanges();
+            }
+        }
+
+        public void SetNewPicture(Player player) //Neues Bild für Spieler definieren
+        {
+            _pictureChanged = false;
+            _oldPicturePath = player.PicturePath;
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Title = "Bild ändern";
@@ -43,12 +99,17 @@ namespace FussballManager
 
             if (openFileDialog.ShowDialog() == true)
             {
-                newPath = openFileDialog.FileName;
-                if (PictureExist(oldPath))
-                {
-
-                }
+                _newPicturePath = openFileDialog.FileName;
+                player.PicturePath = _newPicturePath;
+                _pictureChanged = true;
             }
+        }
+
+        public void ThrowChanges()
+        {
+            _pictureChanged = false;
+            _oldPicturePath = "";
+            _newPicturePath = "";
         }
     }
 }

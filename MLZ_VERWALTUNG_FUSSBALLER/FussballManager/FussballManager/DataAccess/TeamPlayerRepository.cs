@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FussballManager.Model;
-using System.Text.RegularExpressions;
 using System.IO;
 
 namespace FussballManager.DataAccess
@@ -13,14 +9,12 @@ namespace FussballManager.DataAccess
     {
         public string DefaultPicturePath = Path.GetFullPath(@"..\..\Pictures\");
 
-        //Alle vorhandenen Badges laden
-        public List<Player> LoadPlayersWithTeam(int teamID)
+        public List<Player> LoadPlayersWithTeam(int teamID) //Alle Spieler des selektieren Teams laden
         {
             List<tblPlayer> _players;
             List<Player> players = new List<Player>();
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {
-                // _players = context.tblPlayers.Include("tblPositions").ToList<tblPlayer>();
                 if(teamID == -1)
                     _players = (from pl in context.tblPlayers.Include("tblPosition").Include("tblTeam") where pl.Team_ID == null select pl).ToList<tblPlayer>();
                 else
@@ -28,11 +22,12 @@ namespace FussballManager.DataAccess
             }
             foreach(tblPlayer player in _players)
             {
+                //Umwandlung Nullable Types
                 int number;
-                int? test = player.PlayerNmbr as int?;
+                int? tnumber = player.PlayerNmbr as int?;
 
-                if (test.HasValue)
-                    number = test.Value;
+                if (tnumber.HasValue)
+                    number = tnumber.Value;
                 else
                     number = 0;
 
@@ -48,7 +43,7 @@ namespace FussballManager.DataAccess
             return players;
         }
 
-        public List<Position> LoadAllPositions()
+        public List<Position> LoadAllPositions() //Alle vorhandenen Spieler Positionen laden
         {
             List<tblPosition> _positions;
             List<Position> positions = new List<Position>();
@@ -64,7 +59,7 @@ namespace FussballManager.DataAccess
             return positions;
         }
 
-        public List<Team> LoadAllTeams()
+        public List<Team> LoadAllTeams() //Alle vorhandenen Teams laden
         {
             List<tblTeam> _teams;
             List<Team> teams = new List<Team>();
@@ -80,7 +75,7 @@ namespace FussballManager.DataAccess
             return teams;
         }
 
-        public void UpdatePlayer(Player player)
+        public void UpdatePlayer(Player player) //Spezifische Spieler Daten aktualisieren
         {
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {
@@ -102,7 +97,7 @@ namespace FussballManager.DataAccess
             }
         }
 
-        public void AddPlayer(Player player)
+        public void AddPlayer(Player player) //Neuer Spieler hinzufügen
         {
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {
@@ -113,7 +108,7 @@ namespace FussballManager.DataAccess
 
         }
 
-        public void DeletePlayer(Player player)
+        public void DeletePlayer(Player player) //Bestehender Spieler löschen
         {
             using (FootballMngmtEntities context = new FootballMngmtEntities())
             {

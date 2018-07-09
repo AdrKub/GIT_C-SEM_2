@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FussballManager.ViewModel;
-using FussballManager.Model;
-using Microsoft.Win32;
-using System.IO;
 
 namespace FussballManager
 {
@@ -38,31 +26,12 @@ namespace FussballManager
             EnableChangeOrInputData(false);
         }
 
-        private void Test()
-        {
-            string _path;
-            string oldPath = ;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Title = "Bild hinzufügen";
-            openFileDialog.Filter = "jpg Dateien (*.jpg)|*.jpg|png Dateien (*.pgn)|*.png|Alle Dateien (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                _path = openFileDialog.FileName;
-            }
-            else
-                _path = null;
-
-        }
-
-        private void EnableChangeOrInputData(bool mode)
+        private void EnableChangeOrInputData(bool mode) //Dateneingabe freischalten/sperren
         {
             GrdPlayerData.IsEnabled = mode;
-
         }
 
-        private void ChangeActiveMenu(Label activeMenu)
+        private void ChangeActiveMenu(Label activeMenu) //Einfärben des aktiven Menübalken
         {
             LblMenuPlayer.Background = gray;
             LblMenuPlayers.Background = gray;
@@ -82,7 +51,7 @@ namespace FussballManager
                 return false;
         }
 
-        private void ClearPlayerData()
+        private void ClearPlayerData() //Daten in Dateneingabe löschen
         {
             EnableChangeOrInputData(false);
             ChangeActiveMenu(LblMenuPlayers);
@@ -91,9 +60,10 @@ namespace FussballManager
             CmbTeam.SelectedIndex = -1;
             LstvTeams.IsEnabled = true;
             LstvTeamPlayers.IsEnabled = true;
+            BtnFreePlayers.IsEnabled = true;
         }
 
-        private void InputDataValidation()
+        private void InputDataValidation() //Validierung der Daten Eingabe
         {
             string error;
             if (viewModel.InputEnable && viewModel.IsPlayerSelected())
@@ -160,8 +130,9 @@ namespace FussballManager
                 ChangeActiveMenu(LblMenuPlayers);
                 viewModel.LoadAllTeamPlayers(LstvTeams.SelectedIndex);
             }
-        }
+        } //Spieler Liste neu laden
 
+        #region LIST CHANGED
         private void LstvTeamPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(LstvTeamPlayers.SelectedIndex > -1)
@@ -178,12 +149,9 @@ namespace FussballManager
             RefreshPlayerList();
             ClearPlayerData();
         }
+        #endregion
 
-        private void BtnFreePlayers_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.LoadAllTeamPlayers(-1);
-        }
-
+        #region LISTBOX CHANGED
         private void CmbPosition_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewModel.SetPlayerPosition(CmbPosition.SelectedIndex);
@@ -193,21 +161,18 @@ namespace FussballManager
         {
             viewModel.SetPlayerTeam(CmbTeam.SelectedIndex);
         }
+        #endregion
 
+        #region BUTTON CLICKS
         private void BtnDeleteTeam_Click(object sender, RoutedEventArgs e)
         {
             viewModel.RemoveTeam();
             CmbTeam.SelectedIndex = -1;
         }
 
-        private void DtpBirthDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnFreePlayers_Click(object sender, RoutedEventArgs e)
         {
-            InputDataValidation();
-        }
-
-        private void TxtBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            InputDataValidation();
+            viewModel.LoadAllTeamPlayers(-1);
         }
 
         private void BtnChangeData_Click(object sender, RoutedEventArgs e)
@@ -215,6 +180,7 @@ namespace FussballManager
             EnableChangeOrInputData(true);
             LstvTeams.IsEnabled = false;
             LstvTeamPlayers.IsEnabled = false;
+            BtnFreePlayers.IsEnabled = false;
         }
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
@@ -235,6 +201,7 @@ namespace FussballManager
             ChangeActiveMenu(LblMenuPlayer);
             LstvTeams.IsEnabled = false;
             LstvTeamPlayers.IsEnabled = false;
+            BtnFreePlayers.IsEnabled = false;
             if (viewModel.InputEnable)
             {
                 if (viewModel.ValidBirthDate((DateTime)DtpBirthDate.SelectedDate, out string error))
@@ -258,10 +225,22 @@ namespace FussballManager
                 ClearPlayerData();
             } 
         }
+        #endregion
 
         private void ImgPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Test();
+            if(viewModel.InputEnable)
+                viewModel.ChangePlayerPicture();
+        }
+
+        private void DtpBirthDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            InputDataValidation();
+        }
+
+        private void TxtBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            InputDataValidation();
         }
     }
 }

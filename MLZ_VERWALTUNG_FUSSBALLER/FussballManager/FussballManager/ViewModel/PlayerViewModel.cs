@@ -1,51 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FussballManager.Model;
+﻿using FussballManager.Model;
 using _20_MvvmFramework;
 
 namespace FussballManager.ViewModel
 {
     public class PlayerViewModel : ObservableObject
         {
-        private Player player;
+        private Player _player;
 
         public PlayerViewModel(Player inplayer)
         {
-            player = inplayer;
+            _player = inplayer;
         }
 
-        #region Properties
+        #region PROPERTIES
+
         public Player Player
         {
-            get { return player; }
+            get { return _player; }
             set
             {
-                player = value;
+                _player = value;
                 RaisePropertyChanged();
             }
         }
 
         public Position Position
         {
-            get { return player.Position; }
+            get { return _player.Position; }
         }
 
         public Team Team
         {
-            get { return player.Team; }
+            get { return _player.Team; }
         }
-        
+
         public string CompleteName
         {
-            get { return player.Name + " " + player.FirstName; }
+            get { return _player.Name + " " + _player.FirstName; }
         }
 
         public string PositionName
         {
-            get { return player.Position.PosName; }
+            get { return _player.Position.PosName; }
         }
 
         #endregion
