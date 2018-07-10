@@ -92,10 +92,11 @@ namespace FussballManager
         {
             _pictureChanged = false;
             _oldPicturePath = player.PicturePath;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Title = "Bild ändern";
-            openFileDialog.Filter = "jpg Dateien (*.jpg)|*.jpg|png Dateien (*.pgn)|*.png|Alle Dateien (*.*)|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Bild ändern",
+                Filter = "jpg Dateien (*.jpg)|*.jpg|png Dateien (*.pgn)|*.png|Alle Dateien (*.*)|*.*"
+            };
 
             if (openFileDialog.ShowDialog() == true)
             {

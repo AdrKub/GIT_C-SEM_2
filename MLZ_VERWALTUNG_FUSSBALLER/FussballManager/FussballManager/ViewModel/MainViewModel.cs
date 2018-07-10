@@ -33,6 +33,9 @@ namespace FussballManager.ViewModel
         public ICommand RequestChangePlayerData { get { return new RelayCommand(RequestChangePlayerDataExecute, RequestChangePlayerDataCanExecute); } }
         public ICommand ChangeDataAbortion { get { return new RelayCommand(ChangeDataAbortionExecute, ChangeDataAbortionCanExecute); } }
         public ICommand SaveDataChanges { get { return new RelayCommand(SaveDataChangesExecute, SaveDataChangesCanExecute); } }
+        public ICommand DeletePlayerReq { get { return new RelayCommand(DeletePlayerExecute, DeletePlayerCanExecute); } }
+        public ICommand CreateNewPlayer { get { return new RelayCommand(CreateNewPlayerExecute, CreateNewPlayerCanExecute); } }
+
 
         public MainViewModel()
         {
@@ -272,6 +275,34 @@ namespace FussballManager.ViewModel
             else
                 return false;
         }
+
+        void DeletePlayerExecute()
+        {
+
+        }
+
+        bool DeletePlayerCanExecute()
+        {
+            if (SelPlayer.Player != null && _inputEnable == false)
+                return true;
+            else
+                return false;
+        }
+
+        void CreateNewPlayerExecute()
+        {
+
+        }
+
+        bool CreateNewPlayerCanExecute()
+        {
+            if (_inputEnable == false)
+                return true;
+            else
+                return false;
+        }
+
+
 
         #endregion
 

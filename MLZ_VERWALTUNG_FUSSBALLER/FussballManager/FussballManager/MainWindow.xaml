@@ -38,7 +38,7 @@
         <Label Name="LblPlayedGames" Content="Anzahl Spiele" HorizontalAlignment="Left" Margin="520,272,0,0" VerticalAlignment="Top" Width="136" HorizontalContentAlignment="Right" FontSize="10"/>
         <Label Name="LblGoals" Content="Anzahl Tore" HorizontalAlignment="Left" Margin="520,298,0,0" VerticalAlignment="Top" Width="136" HorizontalContentAlignment="Right" FontSize="10"/>
         <Label Name="LblPlayerNmbr" Content="Spielernummer" HorizontalAlignment="Left" Margin="520,88,0,0" VerticalAlignment="Top" Width="136" HorizontalContentAlignment="Right" FontSize="10"/>
-        <Label Name="LblMenuPlayer" Content="Spieler Daten" HorizontalAlignment="Left" Margin="688,191,-190,0" VerticalAlignment="Top" Width="408" HorizontalContentAlignment="Center" FontSize="11" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Background="#FFCDCDCD" Height="27">
+        <Label Name="LblMenuPlayer" Content="Spieler Daten" HorizontalAlignment="Left" Margin="684,188,-186,0" VerticalAlignment="Top" Width="408" HorizontalContentAlignment="Center" FontSize="11" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Background="#FFCDCDCD" Height="27">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -85,9 +85,9 @@
         <Image Name="ImgPlayer" Source="{Binding SelPlayer.Player.PicturePath}" HorizontalAlignment="Left" Height="101" Margin="751,10,0,0" VerticalAlignment="Top" Width="101" Stretch="Fill" MouseLeftButtonDown="ImgPlayer_MouseLeftButtonDown"/>
         <Button Name="BtnChangeData" Content="Ändern" HorizontalAlignment="Left" Margin="522,339,0,0" VerticalAlignment="Top" Width="49" Command="{Binding RequestChangePlayerData}" Click="BtnChangeData_Click"/>
         <Button Name="BtnSaveChanges" Content="Speichern" HorizontalAlignment="Left" Margin="576,339,0,0" VerticalAlignment="Top" Width="65" Command="{Binding SaveDataChanges}" Click="BtnSaveChanges_Click"/>
-        <Button Name="BtnDeletePlayer" Content="Löschen" HorizontalAlignment="Left" Margin="709,339,0,0" VerticalAlignment="Top" Width="54" Click="BtnDeletePlayer_Click"/>
+        <Button Name="BtnDeletePlayer" Content="Löschen" HorizontalAlignment="Left" Margin="709,339,0,0" VerticalAlignment="Top" Width="54" Command="{Binding DeletePlayerReq}" Click="BtnDeletePlayer_Click"/>
         <Button Name="BtnAbortion" Content="Abbruch" HorizontalAlignment="Left" Margin="646,339,0,0" VerticalAlignment="Top" Width="58" Command="{Binding ChangeDataAbortion}" Click="BtnAbortion_Click"/>
-        <Button Name="BtnNewPlayer" Content="Neu" HorizontalAlignment="Left" Margin="768,339,0,0" VerticalAlignment="Top" Width="48" Click="BtnNewPlayer_Click"/>
+        <Button Name="BtnNewPlayer" Content="Neu" HorizontalAlignment="Left" Margin="768,339,0,0" VerticalAlignment="Top" Width="48" Command="{Binding CreateNewPlayer}" Click="BtnNewPlayer_Click"/>
         <Label Name="LblError" Content="" HorizontalAlignment="Left" Margin="522,372,0,0" VerticalAlignment="Top" Width="294" FontWeight="Bold" Foreground="#FFFF0C0C"/>
     </Grid>
 </Window>
